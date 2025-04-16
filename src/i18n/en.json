@@ -1,0 +1,63 @@
+{
+  "navigation": {
+    "rooms": "Rooms & Suites",
+    "conference": "Conference",
+    "contact": "Contact",
+    "home": "Home",
+    "bikeTours": "Bike Tours",
+    "winecellar": "Wine Cellar"
+  },
+  "hero": {
+    "welcome": "Welcome!"
+  },
+  "language": {
+    "english": "English",
+    "german": "German"
+  },
+  "buttons": {
+    "bookNow": "Book Now",
+    "readMore": "Read More",
+    "contactUs": "Contact Us"
+  },
+  "rooms": {
+    "title": "Our Rooms & Suites",
+    "subtitle": "Comfortable accommodation in a beautiful setting",
+    "amenities": "Amenities",
+    "details": "Room Details",
+    "bookRoom": "Book This Room"
+  },
+  "conference": {
+    "title": "Conference Facilities",
+    "subtitle": "Perfect for business meetings and events",
+    "capacity": "Capacity",
+    "equipment": "Equipment",
+    "booking": "Book a Conference Room"
+  },
+  "bikeTours": {
+    "title": "Bike Tours",
+    "subtitle": "Explore the beautiful surroundings",
+    "difficulty": "Difficulty",
+    "duration": "Duration",
+    "distance": "Distance"
+  },
+  "winecellar": {
+    "title": "Wine Cellar",
+    "subtitle": "Discover our exclusive wine selection",
+    "tastings": "Wine Tastings",
+    "events": "Wine Events",
+    "reservation": "Reserve a Tasting"
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "subject": "Subject",
+      "message": "Message",
+      "send": "Send Message"
+    }
+  }
+}
