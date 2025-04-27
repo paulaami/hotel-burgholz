@@ -1,683 +1,606 @@
 <template>
   <div class="room-page">
-    <div class="room-gallery">
-      <div class="gallery-container">
-        <div class="gallery-image-container">
-          <img :src="rooms[activeRoomIndex].images[activeImageIndex]" :alt="rooms[activeRoomIndex].name" class="gallery-image" />
+    <!-- Hero section with logo only -->
+    <section class="hero-section fullwidth-section">
+      <div class="hero-content">
+        <ContentContainer>
+          <div class="hero-logo">
+            <!-- Logo placeholder - replace with actual logo -->
+            <!-- <img src="/src/assets/images/logo.png" alt="Hotel Burgholz Logo" class="logo-image" /> -->
+          </div>
+        </ContentContainer>
+      </div>
+    </section>
+
+    <!-- Page title between hero and carousel -->
+    <section class="page-title-section">
+      <ContentContainer>
+        <h1 class="page-title">{{ currentRoom.name }}</h1>
+        <p class="page-subtitle">{{ currentRoom.category || 'HOTEL BURGHOLZ' }}</p>
+      </ContentContainer>
+    </section>
+    
+    <!-- Carousel section -->
+    <section class="room-carousel-section">
+      <ContentContainer>
+        <div class="carousel-container">
+          <img 
+            :src="currentRoom.images[currentImageIndex]" 
+            :alt="currentRoom.name" 
+            class="carousel-image"
+          />
           
-          <!-- Navigation controls -->
-          <button class="gallery-nav gallery-nav-prev" @click="prevImage">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Navigation arrows -->
+          <button 
+            class="carousel-arrow carousel-arrow-left" 
+            @click="prevImage"
+            aria-label="Previous image"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
               <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
           </button>
-          <button class="gallery-nav gallery-nav-next" @click="nextImage">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <button 
+            class="carousel-arrow carousel-arrow-right" 
+            @click="nextImage"
+            aria-label="Next image"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
               <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
           </button>
-          <button class="gallery-fullscreen" @click="openFullscreen">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-          </button>
-          
-          <!-- Room type overlay -->
-          <div class="room-overlay">
-            <span class="room-category">{{ rooms[activeRoomIndex].category }}</span>
-            <h2 class="room-name">{{ rooms[activeRoomIndex].name }}</h2>
-          </div>
         </div>
-      </div>
-    </div>
-
-    <div class="room-details">
-      <ContentContainer>
-        <div class="room-details-grid">
-          <div class="room-info">
-            <div class="room-specs">
-              <div class="room-spec">
-                <span>{{ rooms[activeRoomIndex].capacity }} Personen</span>
-              </div>
-              <div class="room-spec">
-                <span>Ab {{ rooms[activeRoomIndex].price }},– / Nacht</span>
-              </div>
-              <div class="room-spec" v-if="rooms[activeRoomIndex].size">
-                <span>{{ rooms[activeRoomIndex].size }} m²</span>
-              </div>
-            </div>
-            
-            <div class="room-description">
-              <p v-for="(paragraph, index) in rooms[activeRoomIndex].description" :key="index">
-                {{ paragraph }}
-              </p>
-            </div>
-
-            <div class="room-actions">
-              <button class="details-button" @click="toggleDetails">
-                <span class="button-icon">i</span>
-                DETAILS & AUSSTATTUNG
-              </button>
-              
-              <a :href="rooms[activeRoomIndex].bookingLink" class="booking-button">
-                ZIMMER BUCHEN
-              </a>
-            </div>
+        
+        <!-- Carousel indicators -->
+        <div class="carousel-indicators">
+          <div v-for="(_, index) in currentRoom.images" :key="index" 
+               :class="['indicator-item', { active: index === currentImageIndex }]"
+               @click="goToImage(index)">
           </div>
         </div>
       </ContentContainer>
-    </div>
+    </section>
 
-    <!-- Fullscreen gallery modal -->
-    <div class="fullscreen-gallery" v-if="isFullscreenActive">
-      <div class="fullscreen-content">
-        <img :src="rooms[activeRoomIndex].images[activeImageIndex]" :alt="rooms[activeRoomIndex].name" class="fullscreen-image" />
-        
-        <button class="fullscreen-close" @click="closeFullscreen">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
-        
-        <button class="fullscreen-nav fullscreen-nav-prev" @click="prevImage">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="15 18 9 12 15 6"></polyline>
-          </svg>
-        </button>
-        <button class="fullscreen-nav fullscreen-nav-next" @click="nextImage">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </button>
-      </div>
-    </div>
-
-    <!-- Room details expanded -->
-    <div class="room-details-expanded" v-if="isDetailsActive">
+    <!-- Room details section -->
+    <section class="room-details-section">
       <ContentContainer>
-        <div class="details-header">
-          <h3>Details & Ausstattung</h3>
-          <button class="close-details" @click="toggleDetails">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </button>
+        <!-- Room details bar -->
+        <div class="room-details-bar">
+          <div class="detail-item">
+            <h3 class="detail-title">ROOM SIZE</h3>
+            <p class="detail-value">{{ currentRoom.size }}</p>
+          </div>
+          <div class="detail-item">
+            <h3 class="detail-title">PERSONS</h3>
+            <p class="detail-value">{{ currentRoom.capacity }}</p>
+          </div>
+          <div class="detail-item">
+            <h3 class="detail-title">ROOM PRICE PER NIGHT</h3>
+            <p class="detail-value">{{ currentRoom.price }}</p>
+          </div>
         </div>
-        
-        <div class="details-content">
-          <div class="details-column" v-for="(column, index) in rooms[activeRoomIndex].amenities" :key="index">
-            <h4>{{ column.title }}</h4>
-            <ul>
-              <li v-for="(item, itemIndex) in column.items" :key="itemIndex">{{ item }}</li>
+
+        <!-- Room description -->
+        <div class="room-description-container">
+          <h2 class="description-title">{{ currentRoom.tagline || 'Komfort und Erholung im Schwarzwald' }}</h2>
+          <div class="description-content">
+            <p>{{ currentRoom.description }}</p>
+          </div>
+        </div>
+
+        <!-- Booking button -->
+        <div class="booking-container">
+          <router-link :to="'/buchen/' + roomId" class="booking-button">
+            Book now with a guaranteed price
+          </router-link>
+        </div>
+
+        <!-- Room features -->
+        <div class="room-features">
+          <div class="features-column">
+            <h3 class="features-title">Inclusive services</h3>
+            <ul class="features-list">
+              <li v-for="(service, index) in roomServices" :key="'service-' + index">
+                {{ service }}
+              </li>
+            </ul>
+          </div>
+          <div class="features-column">
+            <h3 class="features-title">Room equipment and special features</h3>
+            <ul class="features-list">
+              <li v-for="(feature, index) in roomFeatures" :key="'feature-' + index">
+                {{ feature }}
+              </li>
             </ul>
           </div>
         </div>
       </ContentContainer>
-    </div>
-
-    <!-- Room navigation -->
-    <div class="room-navigation">
-      <ContentContainer>
-        <div class="room-nav-grid">
-          <div 
-            v-for="(room, index) in rooms" 
-            :key="room.id"
-            class="room-nav-item"
-            :class="{ 'active': index === activeRoomIndex }"
-            @click="changeRoom(index)"
-          >
-            <div class="room-nav-image">
-              <img :src="room.thumbnail" :alt="room.name" />
-            </div>
-            <div class="room-nav-info">
-              <span class="room-nav-category">{{ room.category }}</span>
-              <h3 class="room-nav-name">{{ room.name }}</h3>
-              <span class="room-nav-price">Ab {{ room.price }},– / Nacht</span>
-            </div>
-          </div>
-        </div>
-      </ContentContainer>
-    </div>
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import ContentContainer from '@/components/layout/ContentContainer.vue';
+import ContentContainer from "@/components/layout/ContentContainer.vue";
 
 const route = useRoute();
 const router = useRouter();
+const roomId = computed(() => route.params.id as string);
+const currentImageIndex = ref(0);
 
-// State
-const activeRoomIndex = ref(0);
-const activeImageIndex = ref(0);
-const isFullscreenActive = ref(false);
-const isDetailsActive = ref(false);
-
-// Sample data - this would typically come from an API
-const rooms = ref([
-  {
-    id: 'landhaus',
-    name: 'LANDHAUS',
-    category: 'Doppelzimmer',
-    capacity: 2,
-    price: '112',
-    size: '28',
-    thumbnail: 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80',
+// Room data
+const rooms = {
+  einzelzimmer: {
+    name: "Einzelzimmer",
+    category: "Zimmer",
+    tagline: "Gemütliche Atmosphäre für Einzelreisende",
     images: [
-      'https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80',
-      'https://images.unsplash.com/photo-1560185007-5f0bb1866cab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80',
-      'https://images.unsplash.com/photo-1560448204-603b3fc33dab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80'
+      new URL("@/assets/images/einzelzimmer1.jpg", import.meta.url).href,
+      new URL("@/assets/images/einzelzimmer2.jpg", import.meta.url).href,
+      new URL("@/assets/images/einzelzimmer3.jpg", import.meta.url).href,
     ],
-    description: [
-      'Unser Doppelzimmer im Landhausstil vereint rustikalen Charme mit modernem Komfort. Es verfügt über ein bequemes Doppelbett, ein Badezimmer und teils über einen Balkon oder eine Terrasse.',
-      'Warme Farben und natürliche Materialien schaffen eine einladende Atmosphäre. Im Preis ist das Winzerfrühstücksbuffet inbegriffen.'
+    description: "Unser Einzelzimmer ist ideal für Geschäftsreisende und Radfahrer und bietet eine helle und gemütliche Atmosphäre auf etwa 16 m². Ausgestattet mit einer Klimaanlage sorgt es für angenehme Temperaturen. Ein praktischer Schreibtisch und ein Flat-TV stehen zur Verfügung, während das kostenfreie WLAN mit Glasfaseranschluss schnelle Internetverbindungen garantiert. Für zusätzlichen Komfort gibt es eine Kofferablage und eine Mini-Bar. Das moderne Badezimmer verfügt über eine Dusche und ein WC. Das extra breite Bett misst 120cm x 200cm und kann auf Wunsch auch in der Überlänge von 120cm x 210 cm bereitgestellt werden. Dieses Einzelzimmer kombiniert Komfort und Funktionalität und bietet den perfekten Rückzugsort während Ihres Aufenthalts.",
+    capacity: "1 Person",
+    price: "ab 112,– €",
+    size: "16 m²",
+    services: [
+      "Reichhaltiges Frühstücksbuffet von 7 bis 10 Uhr",
+      "Kostenfreies WLAN mit Glasfaseranschluss",
+      "Tägliche Zimmerreinigung",
+      "Parkplatz am Hotel kostenfrei",
+      "Gepäckservice",
+      "Weckservice auf Anfrage",
     ],
-    bookingLink: '#',
-    amenities: [
-      {
-        title: 'Zimmer',
-        items: [
-          'Doppelbett (180x200 cm)',
-          'Sitzecke',
-          'Klimaanlage',
-          'Flachbild-TV',
-          'Kostenfreies WLAN',
-          'Telefon'
-        ]
-      },
-      {
-        title: 'Bad',
-        items: [
-          'Dusche',
-          'WC',
-          'Haartrockner',
-          'Kosmetikspiegel',
-          'Handtücher',
-          'Pflegeprodukte'
-        ]
-      },
-      {
-        title: 'Service',
-        items: [
-          'Tägliche Reinigung',
-          'Winzerfrühstücksbuffet inklusive',
-          'Parkplatz am Hotel',
-          'Gepäckservice',
-          'Weckservice'
-        ]
-      }
-    ]
+    features: [
+      "Klimaanlage mit individueller Steuerung",
+      "Extra breites Einzelbett (120 × 200 cm)",
+      "Bettgröße auf Wunsch in Überlänge (210 cm)",
+      "Schreibtisch mit Beleuchtung",
+      "Flat-TV mit Satellitenprogrammen",
+      "Minibar mit Erfrischungsgetränken",
+      "Modernes Badezimmer mit Dusche und WC",
+      "Haartrockner und Kosmetikspiegel",
+      "Hochwertige Pflegeprodukte",
+      "Kofferablage",
+    ],
   },
-  {
-    id: 'winzerglueck',
-    name: 'WINZERGLÜCK',
-    category: 'Doppelzimmer',
-    capacity: 2,
-    price: '140',
-    size: '28',
-    thumbnail: 'https://images.unsplash.com/photo-1592861956120-e524fc739696?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80',
+  doppelzimmer: {
+    name: "Doppelzimmer",
+    category: "Zimmer",
+    tagline: "Komfort und Funktionalität für zwei Personen",
     images: [
-      'https://images.unsplash.com/photo-1592861956120-e524fc739696?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80',
-      'https://images.unsplash.com/photo-1560448205-4d9b3e6bb6db?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80',
-      'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80'
+      new URL("@/assets/images/doppelzimmer2.jpg", import.meta.url).href,
+      new URL("@/assets/images/doppelzimmer.jpg", import.meta.url).href,
     ],
-    description: [
-      'Unser Doppelzimmer der Kategorie Winzerglück bietet ein Boxspringbett, eine Sitzecke, ein großzügiges Bad mit begehbarer Dusche und Balkon oder Terrasse.',
-      'Sie können zwischen Zimmern mit oder ohne Teppichboden wählen. Im Preis ist das Winzerfrühstücksbuffet inbegriffen. Genießen Sie die idyllische Umgebung und entspannen Sie nach einem erlebnisreichen Tag.'
+    description: "Das Doppelzimmer ist ideal für Geschäftsreisende und Radfahrer und bietet eine helle und gemütliche Atmosphäre auf etwa 25 m². Ausgestattet mit einer Klimaanlage sorgt es für angenehme Temperaturen. Ein praktischer Schreibtisch und ein Flat-TV stehen zur Verfügung, während das kostenfreie WLAN mit Glasfaseranschluss schnelle Internetverbindungen garantiert. Für zusätzlichen Komfort gibt es eine gemütliche Sitzgelegenheit, eine Kofferablage und eine Mini-Bar. Das moderne Badezimmer verfügt über eine Dusche und ein WC. Die Einzelbetten messen 100 x 200 cm und sind auf Wunsch auch in der Überlänge von 100 x 210 cm erhältlich. Dieses Doppelzimmer kombiniert Komfort und Funktionalität und bietet den perfekten Rückzugsort während Ihres Aufenthalts.",
+    capacity: "2 Personen",
+    price: "ab 140,– €",
+    size: "25 m²",
+    services: [
+      "Reichhaltiges Frühstücksbuffet von 7 bis 10 Uhr",
+      "Kostenfreies WLAN mit Glasfaseranschluss",
+      "Tägliche Zimmerreinigung",
+      "Parkplatz am Hotel kostenfrei",
+      "Gepäckservice",
+      "Weckservice auf Anfrage",
+      "Wäscheservice auf Anfrage",
     ],
-    bookingLink: '#',
-    amenities: [
-      {
-        title: 'Zimmer',
-        items: [
-          'Boxspringbett (180x200 cm)',
-          'Sitzecke',
-          'Klimaanlage',
-          'Flachbild-TV',
-          'Kostenfreies WLAN',
-          'Telefon',
-          'Minibar'
-        ]
-      },
-      {
-        title: 'Bad',
-        items: [
-          'Begehbare Dusche',
-          'WC',
-          'Haartrockner',
-          'Kosmetikspiegel',
-          'Handtücher',
-          'Bademantel',
-          'Pflegeprodukte'
-        ]
-      },
-      {
-        title: 'Service',
-        items: [
-          'Tägliche Reinigung',
-          'Winzerfrühstücksbuffet inklusive',
-          'Parkplatz am Hotel',
-          'Gepäckservice',
-          'Weckservice',
-          'Wäscheservice'
-        ]
-      }
-    ]
+    features: [
+      "Klimaanlage mit individueller Steuerung",
+      "Zwei Einzelbetten (100 × 200 cm)",
+      "Bettgröße auf Wunsch in Überlänge (210 cm)",
+      "Gemütliche Sitzgelegenheit",
+      "Schreibtisch mit Beleuchtung",
+      "Flat-TV mit Satellitenprogrammen",
+      "Minibar mit Erfrischungsgetränken",
+      "Modernes Badezimmer mit Dusche und WC",
+      "Haartrockner und Kosmetikspiegel",
+      "Hochwertige Pflegeprodukte",
+      "Kofferablage",
+    ],
+  },
+  apartment: {
+    name: "Apartment",
+    category: "Apartments",
+    tagline: "Großzügiger Wohnraum mit separatem Schlafzimmer",
+    images: [
+      new URL("@/assets/images/apartment1.jpg", import.meta.url).href,
+      new URL("@/assets/images/apartment2.jpg", import.meta.url).href,
+      new URL("@/assets/images/apartment3.jpg", import.meta.url).href,
+      new URL("@/assets/images/apartment4.jpg", import.meta.url).href,
+    ],
+    description: "Die Apartments bieten für zwei Personen eine komfortable Unterkunft auf 36 m². Jedes Apartment verfügt über separate Schlafzimmer, die Privatsphäre und Ruhe gewährleisten. Die Schlafzimmer sind mit einem luxuriösen Boxspringbett ausgestattet, das eine Größe von 180 x 200 cm hat und für erholsamen Schlaf sorgt. Das Bad ist modern und gut ausgestattet. Das Wohnzimmer lädt mit einem Flat TV zum Entspannen ein und geht nahtlos in den Essbereich über, der ausreichend Platz für gemütliche Mahlzeiten bietet. Eine gut ausgestattete Küchenzeile ermöglicht es den Gästen, sich selbst zu verpflegen. Darüber hinaus gehört zu jedem Apartment eine Terrasse, die zum Verweilen im Freien einlädt. Kostenloses WLAN mit Glasfaser sorgt für schnelle und zuverlässige Internetverbindungen.",
+    capacity: "2 Personen",
+    price: "ab 160,– €",
+    size: "36 m²",
+    services: [
+      "Wahlweise Frühstücksbuffet buchbar",
+      "Kostenfreies WLAN mit Glasfaseranschluss",
+      "Tägliche Reinigung",
+      "Kostenloser Parkplatz",
+      "Gepäckservice",
+      "Wäscheservice auf Anfrage",
+    ],
+    features: [
+      "Separates Schlafzimmer",
+      "Luxuriöses Boxspringbett (180 × 200 cm)",
+      "Wohnzimmer mit gemütlichem Sitzbereich",
+      "Essbereich für gemütliche Mahlzeiten",
+      "Voll ausgestattete Küchenzeile",
+      "Eigene Terrasse",
+      "Flat-TV",
+      "Modernes Badezimmer mit Dusche und WC",
+      "Haartrockner und Kosmetikspiegel",
+      "Hochwertige Pflegeprodukte",
+      "Klimaanlage",
+    ],
+  },
+  studioApartment: {
+    name: "Studio Apartment",
+    category: "Studio",
+    tagline: "Luxuriöser Komfort auf großzügiger Fläche",
+    images: [
+      new URL("@/assets/images/studio.jpg", import.meta.url).href,
+      new URL("@/assets/images/studio2.jpg", import.meta.url).href,
+      new URL("@/assets/images/studio3.jpg", import.meta.url).href,
+      new URL("@/assets/images/studio4.jpg", import.meta.url).href,
+      new URL("@/assets/images/studio5.jpg", import.meta.url).href,
+    ],
+    description: "Das Studio Apartment bietet auf einer großzügigen Fläche von circa 64 m² luxuriösen Komfort und moderne Annehmlichkeiten. Das Apartment verfügt über zwei gemütliche Schlafzimmer, die jeweils eine entspannende Nachtruhe garantieren. Im Hauptschlafzimmer befindet sich ein komfortables Boxspringbett mit den Maßen 180 x 200 cm, während das zweite Schlafzimmer ein ebenfalls bequemes Bett mit den Maßen 120 x 200 cm bietet. Das stilvoll eingerichtete Bad lädt mit seinen hochwertigen Armaturen und einer großzügigen Dusche zur Entspannung ein. Der Wohnbereich ist geschmackvoll dekoriert und bietet ausreichend Platz zum Entspannen und Verweilen. Ein Essbereich ist ebenfalls vorhanden und eignet sich perfekt für gemeinsame Mahlzeiten. Die vollwertige Küche ist mit modernen Geräten ausgestattet, darunter eine Spülmaschine, die den Aufenthalt noch angenehmer macht. So können Sie sich ganz auf Ihre Erholung konzentrieren, ohne sich um den Abwasch kümmern zu müssen. Eine Terrasse rundet das Angebot ab und bietet einen schönen Ort, um die frische Luft zu genießen oder gemütlich draußen zu sitzen.",
+    capacity: "4 Personen",
+    price: "ab 190,– €",
+    size: "64 m²",
+    services: [
+      "Wahlweise Frühstücksbuffet buchbar",
+      "Kostenfreies WLAN mit Glasfaseranschluss",
+      "Tägliche Reinigung",
+      "Kostenloser Parkplatz",
+      "Gepäckservice",
+      "Wäscheservice auf Anfrage",
+    ],
+    features: [
+      "Zwei separate Schlafzimmer",
+      "Hauptschlafzimmer mit Boxspringbett (180 × 200 cm)",
+      "Zweites Schlafzimmer mit Bett (120 × 200 cm)",
+      "Großer Wohnbereich",
+      "Essbereich für gemeinsame Mahlzeiten",
+      "Vollwertige Küche mit Spülmaschine",
+      "Drei Flat-TVs",
+      "Eigene Terrasse",
+      "Stilvolles Bad mit hochwertigen Armaturen",
+      "Großzügige Dusche",
+      "Klimaanlage",
+    ],
+  },
+};
+
+// Current room computed property
+const currentRoom = computed(() => {
+  if (!roomId.value || !rooms[roomId.value]) {
+    router.push('/zimmer'); // Redirect to rooms overview if ID is invalid
+    return {}; 
   }
-]);
-
-// Methods
-const prevImage = () => {
-  if (activeImageIndex.value > 0) {
-    activeImageIndex.value--;
-  } else {
-    activeImageIndex.value = rooms.value[activeRoomIndex.value].images.length - 1;
-  }
-};
-
-const nextImage = () => {
-  if (activeImageIndex.value < rooms.value[activeRoomIndex.value].images.length - 1) {
-    activeImageIndex.value++;
-  } else {
-    activeImageIndex.value = 0;
-  }
-};
-
-const openFullscreen = () => {
-  isFullscreenActive.value = true;
-  document.body.style.overflow = 'hidden';
-};
-
-const closeFullscreen = () => {
-  isFullscreenActive.value = false;
-  document.body.style.overflow = '';
-};
-
-const toggleDetails = () => {
-  isDetailsActive.value = !isDetailsActive.value;
-};
-
-const changeRoom = (index: number) => {
-  activeRoomIndex.value = index;
-  activeImageIndex.value = 0;
-  router.push({ name: 'room', params: { id: rooms.value[index].id } });
-};
-
-// Initialize based on route
-onMounted(() => {
-  const roomId = route.params.id;
-  if (roomId) {
-    const index = rooms.value.findIndex(room => room.id === roomId);
-    if (index !== -1) {
-      activeRoomIndex.value = index;
-    } else {
-      // If room ID not found, redirect to first room
-      router.replace({ name: 'room', params: { id: rooms.value[0].id } });
-    }
-  } else {
-    // If no room ID in route, redirect to first room
-    router.replace({ name: 'room', params: { id: rooms.value[0].id } });
-  }
+  return rooms[roomId.value];
 });
 
-// Watch for route changes
-watch(
-  () => route.params.id,
-  (newId) => {
-    if (newId) {
-      const index = rooms.value.findIndex(room => room.id === newId);
-      if (index !== -1) {
-        activeRoomIndex.value = index;
-        activeImageIndex.value = 0;
-      }
-    }
+// Services and features
+const roomServices = computed(() => currentRoom.value.services || []);
+const roomFeatures = computed(() => currentRoom.value.features || []);
+
+// Carousel navigation methods
+const totalImages = computed(() => currentRoom.value.images?.length || 0);
+
+const nextImage = () => {
+  if (totalImages.value > 0) {
+    currentImageIndex.value = (currentImageIndex.value + 1) % totalImages.value;
   }
-);
+};
+
+const prevImage = () => {
+  if (totalImages.value > 0) {
+    currentImageIndex.value = (currentImageIndex.value - 1 + totalImages.value) % totalImages.value;
+  }
+};
+
+const goToImage = (index) => {
+  currentImageIndex.value = index;
+};
+
+// Reset carousel when room changes
+watch(roomId, () => {
+  currentImageIndex.value = 0;
+});
+
+// Check if room exists on mount
+onMounted(() => {
+  if (roomId.value && !rooms[roomId.value]) {
+    router.push('/zimmer');
+  }
+});
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/variables';
-@import '@/assets/scss/mixins';
+@import "@/assets/scss/variables";
+@import "@/assets/scss/mixins";
 
 .room-page {
-  padding-top: 80px; // To account for fixed header
+  padding-top: 80px; // Account for fixed header
 }
 
-// Gallery section
-.room-gallery {
+// Hero section
+.hero-section {
   position: relative;
   width: 100%;
-  height: 70vh;
-  min-height: 500px;
-  background-color: #f5f5f5;
+  height: 40vh;
+  min-height: 250px;
+  background-image: url("https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   
-  .gallery-container {
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
+    z-index: 1;
   }
   
-  .gallery-image-container {
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    
+    .hero-logo {
+      .logo-image {
+        height: 80px;
+        filter: brightness(0) invert(1); // Makes logo white
+      }
+    }
+  }
+}
+
+.page-title-section {
+  padding: $spacing-lg 0;
+  text-align: center;
+  background-color: #fff;
+  
+  .page-title {
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin: 0 0 $spacing-xs 0;
+    color: #333;
+  }
+  
+  .page-subtitle {
+    font-size: 1rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #666;
+    margin: 0;
+  }
+}
+
+// Carousel section
+.room-carousel-section {
+  padding: $spacing-md 0;
+  
+  .carousel-container {
     position: relative;
     width: 100%;
-    height: 100%;
-  }
-  
-  .gallery-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .gallery-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(5px);
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    transition: background-color $transition-speed ease;
-    z-index: 2;
+    height: 0;
+    padding-bottom: 56.25%; // 16:9 aspect ratio
+    overflow: hidden;
     
-    &:hover {
+    .carousel-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.3s ease;
+    }
+    
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
       background-color: rgba(255, 255, 255, 0.5);
-    }
-    
-    &-prev {
-      left: 20px;
-    }
-    
-    &-next {
-      right: 20px;
-    }
-    
-    svg {
-      width: 20px;
-      height: 20px;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 2;
+      transition: background-color 0.3s ease;
+      
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.8);
+      }
+      
+      &-left {
+        left: 20px;
+      }
+      
+      &-right {
+        right: 20px;
+      }
+      
+      svg {
+        width: 24px;
+        height: 24px;
+      }
     }
   }
   
-  .gallery-fullscreen {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(5px);
-    border: none;
-    cursor: pointer;
+  .carousel-indicators {
     display: flex;
-    align-items: center;
     justify-content: center;
-    color: white;
-    transition: background-color $transition-speed ease;
-    z-index: 2;
+    gap: 8px;
+    margin-top: 16px;
     
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.5);
-    }
-    
-    svg {
-      width: 20px;
-      height: 20px;
-    }
-  }
-  
-  .room-overlay {
-    position: absolute;
-    bottom: 50px;
-    left: 50px;
-    color: white;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    z-index: 2;
-    
-    .room-category {
-      display: block;
-      font-size: $font-size-medium;
-      margin-bottom: $spacing-xs;
-    }
-    
-    .room-name {
-      font-size: 42px;
-      font-weight: 500;
-      margin: 0;
+    .indicator-item {
+      width: 40px;
+      height: 5px;
+      background-color: #ddd;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      
+      &.active {
+        background-color: $color-primary;
+      }
+      
+      &:hover {
+        background-color: darken(#ddd, 10%);
+      }
     }
   }
 }
 
 // Room details section
-.room-details {
-  padding: $spacing-xl 0;
+.room-details-section {
+  padding: $spacing-section 0;
   
-  .room-details-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
-  
-  .room-info {
-    .room-specs {
-      display: flex;
-      gap: $spacing-xl;
-      margin-bottom: $spacing-lg;
+  .room-details-bar {
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: $spacing-lg 0;
+    margin-bottom: $spacing-xl;
+    
+    .detail-item {
+      text-align: center;
+      padding: 0 $spacing-md;
       
-      .room-spec {
-        font-size: $font-size-medium;
-        color: $color-text-dark;
+      .detail-title {
+        font-size: 0.8rem;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #666;
+        margin: 0 0 $spacing-xs 0;
+      }
+      
+      .detail-value {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #333;
+        margin: 0;
       }
     }
+  }
+  
+  .room-description-container {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto $spacing-xl;
     
-    .room-description {
+    .description-title {
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: #333;
+      margin: 0 0 $spacing-lg 0;
+    }
+    
+    .description-content {
+      color: #666;
+      line-height: 1.8;
+      
       p {
-        margin-bottom: $spacing-md;
-        line-height: 1.6;
-        color: $color-text-light;
-      }
-    }
-    
-    .room-actions {
-      display: flex;
-      gap: $spacing-md;
-      margin-top: $spacing-xl;
-      
-      .details-button {
-        display: inline-flex;
-        align-items: center;
-        gap: $spacing-sm;
-        border: none;
-        background: none;
-        color: $color-text-dark;
-        font-size: $font-size-base;
-        font-weight: 500;
-        cursor: pointer;
-        padding: 0;
-        
-        .button-icon {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 24px;
-          height: 24px;
-          border-radius: 50%;
-          background-color: $color-text-dark;
-          color: white;
-          font-style: italic;
-          font-weight: bold;
-        }
-        
-        &:hover {
-          color: $color-primary;
-          
-          .button-icon {
-            background-color: $color-primary;
-          }
-        }
-      }
-      
-      .booking-button {
-        display: inline-block;
-        padding: $spacing-sm $spacing-xl;
-        background-color: $color-text-dark;
-        color: white;
-        text-decoration: none;
-        font-size: $font-size-base;
-        font-weight: 500;
-        transition: background-color $transition-speed ease;
-        
-        &:hover {
-          background-color: $color-primary;
-        }
-      }
-    }
-  }
-}
-
-// Fullscreen gallery
-.fullscreen-gallery {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  
-  .fullscreen-content {
-    position: relative;
-    width: 90%;
-    height: 90%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .fullscreen-image {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-  }
-  
-  .fullscreen-close {
-    position: absolute;
-    top: -40px;
-    right: 0;
-    width: 40px;
-    height: 40px;
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    
-    svg {
-      width: 24px;
-      height: 24px;
-    }
-  }
-  
-  .fullscreen-nav {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.2);
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    transition: background-color $transition-speed ease;
-    
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.3);
-    }
-    
-    &-prev {
-      left: -70px;
-    }
-    
-    &-next {
-      right: -70px;
-    }
-    
-    svg {
-      width: 20px;
-      height: 20px;
-    }
-  }
-}
-
-// Room details expanded
-.room-details-expanded {
-  padding: $spacing-xl 0;
-  background-color: $color-background-light;
-  
-  .details-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: $spacing-lg;
-    
-    h3 {
-      font-size: $font-size-large;
-      font-weight: 500;
-      margin: 0;
-    }
-    
-    .close-details {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: $spacing-xs;
-      
-      svg {
-        width: 20px;
-        height: 20px;
-      }
-    }
-  }
-  
-  .details-content {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: $spacing-xl;
-    
-    .details-column {
-      h4 {
-        font-size: $font-size-medium;
-        font-weight: 500;
         margin: 0 0 $spacing-md 0;
       }
+    }
+  }
+  
+  .booking-container {
+    text-align: center;
+    margin-bottom: $spacing-xxl;
+    
+    .booking-button {
+      display: inline-block;
+      padding: $spacing-md $spacing-xxl;
+      background-color: $color-primary;
+      color: white;
+      text-decoration: none;
+      text-transform: none;
+      font-size: 1rem;
+      font-weight: 400;
+      transition: background-color 0.3s ease;
       
-      ul {
+      &:hover {
+        background-color: darken($color-primary, 10%);
+      }
+    }
+  }
+  
+  .room-features {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-xl;
+    background-color: #f7f7f7;
+    padding: $spacing-xl;
+    
+    @include responsive(min-md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .features-column {
+      .features-title {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: #333;
+        margin: 0 0 $spacing-lg 0;
+        padding-bottom: $spacing-sm;
+        border-bottom: 1px solid #ddd;
+      }
+      
+      .features-list {
         list-style: none;
         padding: 0;
         margin: 0;
         
         li {
-          margin-bottom: $spacing-xs;
-          padding-left: $spacing-md;
           position: relative;
+          padding-left: $spacing-md;
+          margin-bottom: $spacing-sm;
+          line-height: 1.6;
+          color: #666;
           
           &::before {
-            content: '•';
+            content: "•";
             position: absolute;
             left: 0;
             color: $color-primary;
@@ -688,165 +611,76 @@ watch(
   }
 }
 
-// Room navigation
-.room-navigation {
-  padding: $spacing-xl 0;
-  background-color: white;
-  
-  .room-nav-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: $spacing-xl;
-  }
-  
-  .room-nav-item {
-    cursor: pointer;
-    transition: transform $transition-speed ease;
-    
-    &:hover {
-      transform: translateY(-5px);
-    }
-    
-    &.active {
-      .room-nav-name {
-        color: $color-primary;
-      }
-    }
-  }
-  
-  .room-nav-image {
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-    margin-bottom: $spacing-sm;
-    
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform $transition-speed ease;
-    }
-  }
-  
-  .room-nav-item:hover .room-nav-image img {
-    transform: scale(1.05);
-  }
-  
-  .room-nav-info {
-    .room-nav-category {
-      font-size: $font-size-small;
-      color: $color-text-light;
-      display: block;
-      margin-bottom: $spacing-xs;
-    }
-    
-    .room-nav-name {
-      font-size: $font-size-medium;
-      font-weight: 500;
-      margin: 0 0 $spacing-xs 0;
-      transition: color $transition-speed ease;
-    }
-    
-    .room-nav-price {
-      font-size: $font-size-small;
-      color: $color-text-light;
-    }
-  }
-}
-
-@include responsive(lg) {
-  .room-gallery {
-    height: 60vh;
-    
-    .room-overlay {
-      left: 30px;
-      bottom: 30px;
-      
-      .room-name {
-        font-size: 32px;
-      }
-    }
-  }
-  
-  .room-details-expanded {
-    .details-content {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-}
-
+// Responsive styles
 @include responsive(md) {
-  .room-gallery {
-    height: 50vh;
-    
-    .gallery-nav {
-      width: 40px;
-      height: 40px;
-    }
-    
-    .gallery-fullscreen {
-      width: 40px;
-      height: 40px;
-    }
-  }
-  
-  .room-details {
-    .room-info {
-      .room-specs {
-        flex-direction: column;
-        gap: $spacing-sm;
-      }
+  .room-details-section {
+    .room-details-bar {
+      flex-direction: column;
+      gap: $spacing-md;
       
-      .room-actions {
-        flex-direction: column;
-        align-items: flex-start;
+      .detail-item {
+        border-bottom: 1px solid #eee;
+        padding-bottom: $spacing-sm;
+        
+        &:last-child {
+          border-bottom: none;
+        }
       }
-    }
-  }
-  
-  .room-details-expanded {
-    .details-content {
-      grid-template-columns: 1fr;
     }
   }
 }
 
 @include responsive(sm) {
-  .room-gallery {
-    min-height: 300px;
+  .hero-section {
+    min-height: 150px;
     
-    .room-overlay {
-      left: 20px;
-      bottom: 20px;
-      
-      .room-category {
-        font-size: $font-size-base;
+    .hero-content {
+      .hero-logo {
+        .logo-image {
+          height: 60px;
+        }
       }
-      
-      .room-name {
-        font-size: 28px;
-      }
-    }
-    
-    .gallery-nav {
-      width: 35px;
-      height: 35px;
-    }
-    
-    .gallery-fullscreen {
-      width: 35px;
-      height: 35px;
     }
   }
   
-  .fullscreen-gallery {
-    .fullscreen-nav {
-      &-prev {
-        left: -50px;
+  .page-title-section {
+    .page-title {
+      font-size: 2rem;
+    }
+  }
+  
+  .room-carousel-section {
+    .carousel-container {
+      .carousel-arrow {
+        width: 40px;
+        height: 40px;
+        
+        svg {
+          width: 20px;
+          height: 20px;
+        }
       }
-      
-      &-next {
-        right: -50px;
+    }
+    
+    .carousel-indicators {
+      .indicator-item {
+        width: 30px;
+        height: 4px;
+      }
+    }
+  }
+  
+  .room-details-section {
+    .room-description-container {
+      .description-title {
+        font-size: 1.5rem;
+      }
+    }
+    
+    .booking-container {
+      .booking-button {
+        width: 100%;
+        padding: $spacing-md;
       }
     }
   }

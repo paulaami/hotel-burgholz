@@ -1,92 +1,46 @@
 <template>
-	<header
-		:class="[
-			'hotel-header',
-			{
-				transparent: !isHeaderSolid,
-				solid: isHeaderSolid,
-				'not-home': !isHomePage,
-			},
-		]"
-	>
-		<!-- Left side - Menu button -->
-		<div class="header-left">
-			<button
-				:class="['nav__menu', 'detect-nav', { 'menu--active': isMenuActive }]"
-				@click="handleNav"
-			>
-				<span class="menu-text">MENÜ</span>
-			</button>
-		</div>
+	<div>
+		<header
+			:class="[
+				'hotel-header',
+				{
+					transparent: !isHeaderSolid,
+					solid: isHeaderSolid,
+					'not-home': !isHomePage,
+				},
+			]"
+		>
+			<!-- Left side - Menu button -->
+			<div class="header-left">
+				<button
+					:class="['nav__menu', 'detect-nav', { 'menu--active': isMenuActive }]"
+					@click="handleNav"
+				>
+					<div class="hamburger-icon">
+						<span :class="['hamburger-line', { active: isMenuActive }]"></span>
+						<span :class="['hamburger-line', { active: isMenuActive }]"></span>
+						<span :class="['hamburger-line', { active: isMenuActive }]"></span>
+					</div>
+					<span class="menu-text">{{ isMenuActive ? "ZURÜCK" : "MENÜ" }}</span>
+				</button>
+			</div>
 
-		<!-- Center - Hotel logo -->
+			<!-- Right side - Icons -->
+			<div class="header-right">
+				<LanguageSwitcher class="header-language-switcher" />
+			</div>
+
+			<!-- Navigation panel that appears when menu is clicked -->
+			<Navigation :is-active="isNavigationActive" @close="closeNav" />
+		</header>
+
+		<!-- Center - Hotel logo (MOVED OUTSIDE THE FIXED HEADER) -->
 		<div class="header-center">
 			<router-link to="/" class="logo-link">
 				<Logo />
 			</router-link>
 		</div>
-
-		<!-- Right side - Icons -->
-		<div class="header-right">
-			<LanguageSwitcher class="header-language-switcher" />
-			<!-- <div class="header-icons">
-				<a href="#" class="icon-link">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 24 24"
-						width="24"
-						height="24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-					>
-						<path
-							d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h6"
-						></path>
-						<rect x="9" y="9" width="12" height="12" rx="2"></rect>
-					</svg>
-				</a>
-				<a href="tel:+123456789" class="icon-link">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 24 24"
-						width="24"
-						height="24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-					>
-						<path
-							d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
-						></path>
-					</svg>
-				</a>
-				<a href="#" class="icon-link">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 24 24"
-						width="24"
-						height="24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-					>
-						<circle cx="11" cy="11" r="8"></circle>
-						<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-					</svg>
-				</a>
-			</div> -->
-		</div>
-
-		<!-- Navigation panel that appears when menu is clicked -->
-		<Navigation :is-active="isNavigationActive" @close="closeNav" />
-	</header>
+	</div>
 </template>
 
 <script setup lang="ts">
@@ -105,13 +59,30 @@ const isHeaderSolid = ref(false);
 
 // Methods
 const handleNav = () => {
-	isMenuActive.value = !isMenuActive.value;
-	isNavigationActive.value = !isNavigationActive.value;
+	// Scroll to top before opening menu
+	window.scrollTo({
+		top: 0,
+		behavior: 'smooth'
+	});
+
+	// Use setTimeout to ensure menu opens after scroll animation completes
+	setTimeout(() => {
+		isMenuActive.value = !isMenuActive.value;
+		isNavigationActive.value = !isNavigationActive.value;
+
+		// Add overflow hidden to body when menu is active to prevent scrolling
+		if (isMenuActive.value) {
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.overflow = "";
+		}
+	}, 300); // Adjust timing as needed based on your scroll animation duration
 };
 
 const closeNav = () => {
 	isMenuActive.value = false;
 	isNavigationActive.value = false;
+	document.body.style.overflow = "";
 };
 
 const clickOutsideNav = (e: MouseEvent) => {
@@ -157,6 +128,7 @@ onMounted(() => {
 onUnmounted(() => {
 	window.removeEventListener("click", clickOutsideNav);
 	window.removeEventListener("scroll", handleScroll);
+	document.body.style.overflow = "";
 });
 </script>
 
@@ -175,19 +147,30 @@ onUnmounted(() => {
 	padding: 0 $spacing-lg;
 	transition: background-color $transition-speed ease,
 		box-shadow $transition-speed ease;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.25);
 
 	&.transparent {
 		background-color: transparent;
 		box-shadow: none;
-		.menu-text,
-		.icon-link {
+		.menu-text {
+			color: $color-white;
+		}
+		.hamburger-line {
+			background-color: $color-white;
+		}
+		:deep(.social-icon) {
 			color: $color-white;
 		}
 	}
 
 	&.not-home {
-		.menu-text,
-		.icon-link {
+		.menu-text {
+			color: $color-text-dark;
+		}
+		.hamburger-line {
+			background-color: $color-text-dark;
+		}
+		:deep(.social-icon) {
 			color: $color-text-dark;
 		}
 	}
@@ -197,8 +180,13 @@ onUnmounted(() => {
 		backdrop-filter: blur(5px);
 		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 
-		.menu-text,
-		.icon-link {
+		.menu-text {
+			color: $color-text-dark;
+		}
+		.hamburger-line {
+			background-color: $color-text-dark;
+		}
+		:deep(.social-icon) {
 			color: $color-text-dark;
 		}
 	}
@@ -208,7 +196,7 @@ onUnmounted(() => {
 .header-center,
 .header-right {
 	@include flex-center;
-	height: 100%;
+	height: auto;
 }
 
 .header-left {
@@ -222,6 +210,37 @@ onUnmounted(() => {
 		display: flex;
 		align-items: center;
 		padding: $spacing-sm 0;
+		gap: $spacing-sm;
+
+		.hamburger-icon {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			width: 24px;
+			height: 16px;
+			position: relative;
+
+			.hamburger-line {
+				display: block;
+				width: 100%;
+				height: 2px;
+				transition: all $transition-speed ease;
+
+				&.active {
+					&:nth-child(1) {
+						transform: translateY(7px) rotate(45deg);
+					}
+
+					&:nth-child(2) {
+						opacity: 0;
+					}
+
+					&:nth-child(3) {
+						transform: translateY(-7px) rotate(-45deg);
+					}
+				}
+			}
+		}
 
 		.menu-text {
 			font-size: $font-size-medium;
@@ -231,16 +250,20 @@ onUnmounted(() => {
 		}
 
 		&.menu--active .menu-text {
-			color: $color-primary;
 			font-weight: 600;
 		}
 	}
 }
 
 .header-center {
+	position: absolute;
+	top: 80px;
+	left: 51%;
+	transform: translateX(-50%);
 	flex: 2;
 	justify-content: center;
 	overflow: hidden;
+	z-index: 998; /* Below the navigation but above other content */
 	.logo-link {
 		text-decoration: none;
 	}
@@ -249,24 +272,6 @@ onUnmounted(() => {
 .header-right {
 	flex: 1;
 	justify-content: flex-end;
-
-	.header-icons {
-		display: flex;
-		gap: $spacing-lg;
-
-		.icon-link {
-			transition: color $transition-speed ease;
-
-			&:hover {
-				color: $color-primary;
-			}
-
-			svg {
-				width: 22px;
-				height: 22px;
-			}
-		}
-	}
 }
 
 @include responsive(md) {
@@ -282,6 +287,13 @@ onUnmounted(() => {
 
 	.header-right .header-icons {
 		gap: $spacing-sm;
+	}
+}
+
+// Media query for desktop view (992px and above)
+@media (min-width: 992px) {
+	.header-center {
+		top: 80px;
 	}
 }
 </style>

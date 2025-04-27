@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 // import { getDefaultLanguage, SUPPORTED_LANGUAGES } from '@/i18n';
 import HomePage from "@/views/HomePage.vue";
 import ZimmerOverviewPage from "@/views/ZimmerOverviewPage.vue";
-// import RoomPage from '@/views/RoomPage.vue'
+import RoomPage from '@/views/RoomPage.vue'
 import TagungPage from "@/views/TagungPage.vue";
 import BikeTourPage from "@/views/BikeTourPage.vue";
 import KontaktPage from '@/views/KontaktPage.vue'
@@ -44,15 +44,15 @@ const routes = [
     meta: { 
       activeMenu: 'kontakt'
     }
+  },
+  {
+    path: '/zimmer/:id',
+    name: 'room-detail',
+    component: RoomPage,
+    meta: {
+      activeMenu: 'room'
+    }
   }
-  // {
-  //   path: '/zimmer/:id',
-  //   name: 'room',
-  //   component: RoomPage,
-  //   meta: {
-  //     activeMenu: 'zimmer'
-  //   }
-  // }
 ];
 
 const router = createRouter({

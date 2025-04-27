@@ -88,6 +88,7 @@ onUnmounted(() => {
 	display: flex;
 	align-items: center;
 	gap: $spacing-xxl;
+	
 	&.image-first {
 		flex-direction: row-reverse;
 	}
@@ -190,8 +191,18 @@ onUnmounted(() => {
 
 @include responsive(lg) {
 	.description-content {
-		flex-direction: column-reverse;
+		flex-direction: column-reverse !important; /* Force column-reverse for both layouts */
 		gap: $spacing-xxl;
+		
+		/* Ensure order is respected for image-first layout at smaller screens */
+		&.image-first {
+			.description-text {
+				order: 2;
+			}
+			.description-image {
+				order: 1;
+			}
+		}
 	}
 
 	.description-text,
