@@ -1,7 +1,10 @@
 <template>
 	<div class="room-page">
 		<!-- Hero section with room title overlay -->
-		<section class="hero-section fullwidth-section">
+		<section 
+			class="hero-section fullwidth-section"
+			:style="{ backgroundImage: `url(${heroBackgroundImage})` }"
+		>
 			<div class="hero-content">
 				<ContentContainer>
 					<h1 class="hero-title">{{ currentRoom.name?.toUpperCase() }}</h1>
@@ -311,6 +314,15 @@ const currentRoom = computed(() => {
 	return rooms[roomId.value];
 });
 
+// Hero background image - uses the first image from the room's image array
+const heroBackgroundImage = computed(() => {
+	if (currentRoom.value.images && currentRoom.value.images.length > 0) {
+		return currentRoom.value.images[0]; // You can change this to use any index you prefer
+	}
+	// Fallback to the original Unsplash image if no room images are available
+	return "https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80";
+});
+
 // Services and features
 const roomServices = computed(() => currentRoom.value.services || []);
 const roomFeatures = computed(() => currentRoom.value.features || []);
@@ -352,20 +364,21 @@ onMounted(() => {
 @import "@/assets/scss/variables";
 @import "@/assets/scss/mixins";
 
-// Hero section - matching zimmerpage.vue style
+// Hero section - now uses dynamic background image
 .hero-section {
 	position: relative;
 	width: 100%;
 	height: 60vh;
 	min-height: 400px;
-	background-image: url("https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80");
 	background-size: cover;
 	background-position: center;
+	background-repeat: no-repeat;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	color: $color-white;
+	transition: background-image 0.5s ease-in-out; // Smooth transition when switching rooms
 
 	&::before {
 		content: "";
