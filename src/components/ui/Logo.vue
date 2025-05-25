@@ -48,6 +48,9 @@
 }
 
 .not-home-logo {
+	@include responsive(lg) {
+		display: none;
+	}
 	position: relative;
 	max-width: 600px;
 	overflow: visible;

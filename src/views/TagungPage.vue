@@ -712,11 +712,11 @@ const closeDetails = () => {
 			.carousel-arrow {
 				width: 35px;
 				height: 35px;
-				left: 10px;
+				// left: 10px;
 
-				&-right {
-					right: 10px;
-				}
+				// &-right {
+				// 	right: 10px;
+				// }
 
 				svg {
 					width: 16px;
