@@ -86,8 +86,8 @@ import ContentContainer from "@/components/layout/ContentContainer.vue";
 // const { t } = useI18n();
 // Hero content
 const heroContent = ref({
-	title: "Hotel Burgholz",
-	subtitle: "Herzlich Willkommen!",
+	title: "",
+	subtitle: "",
 	buttons: [
 		{ text: "Zimmer", url: "#" },
 		{ text: "Tagung", url: "#" },

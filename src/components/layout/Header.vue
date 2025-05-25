@@ -37,7 +37,13 @@
 		<!-- Center - Hotel logo (MOVED OUTSIDE THE FIXED HEADER) -->
 		<div class="header-center">
 			<router-link to="/" class="logo-link">
-				<Logo />
+				<Logo
+					:class="[
+						{
+							'not-home-logo': !isHomePage,
+						},
+					]"
+				/>
 			</router-link>
 		</div>
 	</div>
@@ -62,7 +68,7 @@ const handleNav = () => {
 	// Scroll to top before opening menu
 	window.scrollTo({
 		top: 0,
-		behavior: 'smooth'
+		behavior: "smooth",
 	});
 
 	// Use setTimeout to ensure menu opens after scroll animation completes
@@ -141,7 +147,7 @@ onUnmounted(() => {
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: 80px;
+	height: 123px;
 	z-index: 1000;
 	@include flex-between;
 	padding: 0 $spacing-lg;
@@ -165,13 +171,13 @@ onUnmounted(() => {
 
 	&.not-home {
 		.menu-text {
-			color: $color-text-dark;
+			// color: $color-text-dark;
 		}
 		.hamburger-line {
-			background-color: $color-text-dark;
+			// background-color: $color-text-dark;
 		}
 		:deep(.social-icon) {
-			color: $color-text-dark;
+			// color: $color-text-dark;
 		}
 	}
 
@@ -189,6 +195,13 @@ onUnmounted(() => {
 		:deep(.social-icon) {
 			color: $color-text-dark;
 		}
+	}
+}
+
+.not-home {
+	height: 80px;
+	.hotel-logo {
+		max-width: 600px;
 	}
 }
 
@@ -290,10 +303,17 @@ onUnmounted(() => {
 	}
 }
 
-// Media query for desktop view (992px and above)
+//Media query for desktop view (992px and above)
 @media (min-width: 992px) {
 	.header-center {
-		top: 80px;
+		top: -35px;
+	}
+	.hotel-header {
+		border-bottom: none;
+	}
+
+	.hotel-header.solid {
+		height: 80px;
 	}
 }
 </style>

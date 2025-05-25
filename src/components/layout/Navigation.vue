@@ -1,11 +1,5 @@
 <template>
-	<div 
-		:class="[
-			'navigation', 
-			'detect-nav', 
-			{ 'navigation__active': isActive }
-		]"
-	>
+	<div :class="['navigation', 'detect-nav', { navigation__active: isActive }]">
 		<div class="navigation__overlay detect-nav">
 			<div class="nav__container detect-nav">
 				<ul class="nav__list detect-nav">
@@ -23,7 +17,7 @@
 						</router-link>
 					</li>
 				</ul>
-				
+
 				<!-- Icons in the menu -->
 				<div class="menu__icons detect-nav">
 					<a href="https://www.instagram.com" target="_blank" class="menu-icon">
@@ -60,7 +54,11 @@
 							></path>
 						</svg>
 					</a>
-					<a href="https://wa.me/yourphonenumber" target="_blank" class="menu-icon">
+					<a
+						href="https://wa.me/yourphonenumber"
+						target="_blank"
+						class="menu-icon"
+					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 24 24"
@@ -72,7 +70,9 @@
 							stroke-linecap="round"
 							stroke-linejoin="round"
 						>
-							<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+							<path
+								d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
+							></path>
 						</svg>
 					</a>
 				</div>
@@ -99,6 +99,7 @@ const navigationItems = [
 	{ text: "Home", url: "/", route: "home" },
 	{ text: "Zimmer", url: "/zimmer", route: "room" },
 	{ text: "Tagung", url: "/tagung", route: "restaurant" },
+	{ text: "Energy Star", url: "/energy-star", route: "energy-star" },
 	{ text: "Bike Tours", url: "/bike-tours", route: "bike-tours" },
 	// { text: "Weinkeller", url: "/weinkeller", route: "weinkeller" },
 	{ text: "Kontakt", url: "/kontakt", route: "kontakt" },
@@ -131,12 +132,12 @@ const isActiveRoute = (routeName: string) => {
 	visibility: hidden;
 	transition: opacity $transition-speed ease, visibility $transition-speed ease;
 	overflow-y: auto;
-	
+
 	&__active {
 		opacity: 1;
 		visibility: visible;
 	}
-	
+
 	&__overlay {
 		position: absolute;
 		top: 0;
@@ -184,23 +185,23 @@ const isActiveRoute = (routeName: string) => {
 			}
 		}
 	}
-	
+
 	.menu__icons {
 		display: flex;
 		justify-content: center;
 		width: 100%;
 		margin-top: $spacing-xl;
 		gap: $spacing-xl;
-		
+
 		.menu-icon {
 			display: flex;
 			color: $color-white;
-			
+
 			svg {
 				width: 28px;
 				height: 28px;
 			}
-			
+
 			&:hover {
 				color: $color-primary;
 			}

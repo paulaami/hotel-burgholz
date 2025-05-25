@@ -24,6 +24,15 @@
 					<img :src="content.image.src" :alt="content.image.alt" />
 				</div>
 			</div>
+
+			<!-- Content below image -->
+			<div v-if="content.belowImageContent" class="below-image-content" :class="{ 'animate': isVisible }">
+				<div class="below-image-text">
+					<p v-for="(paragraph, index) in content.belowImageContent" :key="index">
+						{{ paragraph }}
+					</p>
+				</div>
+			</div>
 		</ContentContainer>
 	</section>
 </template>
@@ -86,6 +95,7 @@ onUnmounted(() => {
 
 .description-content {
 	display: flex;
+	flex-direction: column !important;
 	align-items: center;
 	gap: $spacing-xxl;
 	
@@ -96,6 +106,7 @@ onUnmounted(() => {
 
 .description-text {
 	flex: 3;
+	align-self: flex-start;
 	opacity: 0;
 	transform: translateX(-50px);
 	transition: opacity 0.8s ease, transform 0.8s ease;
@@ -166,7 +177,8 @@ onUnmounted(() => {
 	transform: translateX(50px);
 	transition: opacity 0.8s ease, transform 0.8s ease;
 	transition-delay: 0.2s; // Slight delay for staggered effect
-	
+	max-width: 800px;
+
 	&.animate {
 		opacity: 1;
 		transform: translateX(0);
@@ -188,6 +200,38 @@ onUnmounted(() => {
 		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 	}
 }
+
+// New styles for below-image content
+.below-image-content {
+	margin-top: $spacing-xxl;
+	width: 100%;
+	opacity: 0;
+	transform: translateY(30px);
+	transition: opacity 0.8s ease, transform 0.8s ease;
+	transition-delay: 0.4s; // Delayed after image animation
+	
+	&.animate {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.below-image-text {
+	color: $color-text-light;
+	line-height: 1.7;
+	text-align: center;
+	max-width: 800px;
+	margin: 0 auto;
+	
+	p {
+		margin-bottom: $spacing-lg;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
 
 @include responsive(lg) {
 	.description-content {

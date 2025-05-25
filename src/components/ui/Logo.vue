@@ -11,7 +11,7 @@
 .hotel-logo {
 	text-align: center;
 	width: 100vw;
-  max-width: 800px;
+	max-width: 800px;
 
 	// img {
 	// 	width: 100%;
@@ -44,6 +44,15 @@
 		font-weight: 400;
 		margin-top: $spacing-xs;
 		transition: color $transition-speed ease;
+	}
+}
+
+.not-home-logo {
+	position: relative;
+	max-width: 600px;
+	overflow: visible;
+	@media (min-width: 992px) {
+		top: 5px;
 	}
 }
 

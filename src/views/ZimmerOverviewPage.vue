@@ -122,9 +122,9 @@ const rooms = {
 @import "@/assets/scss/variables";
 @import "@/assets/scss/mixins";
 
-.zimmer-page {
-  padding-top: 80px; // Account for fixed header
-}
+// .zimmer-page {
+//   padding-top: 80px; // Account for fixed header
+// }
 
 // Hero section styles
 .hero-section {

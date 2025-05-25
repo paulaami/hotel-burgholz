@@ -3,7 +3,7 @@
 		<!-- Hero section with background image -->
 		<section class="hero-section fullwidth-section">
 			<!-- Navigation arrows for slider functionality -->
-			<button class="slider-arrow slider-arrow-left">
+			<!-- <button class="slider-arrow slider-arrow-left">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 24 24"
@@ -17,8 +17,8 @@
 				>
 					<polyline points="15 18 9 12 15 6"></polyline>
 				</svg>
-			</button>
-			<button class="slider-arrow slider-arrow-right">
+			</button> -->
+			<!-- <button class="slider-arrow slider-arrow-right">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 24 24"
@@ -32,7 +32,7 @@
 				>
 					<polyline points="9 18 15 12 9 6"></polyline>
 				</svg>
-			</button>
+			</button> -->
 
 			<!-- Hero content -->
 			<div class="hero-content">
@@ -273,9 +273,9 @@ const submitForm = () => {
 @import "@/assets/scss/variables";
 @import "@/assets/scss/mixins";
 
-.kontakt-page {
-	padding-top: 80px; // Account for fixed header
-}
+// .kontakt-page {
+// 	padding-top: 80px; // Account for fixed header
+// }
 
 // Hero section styles
 .hero-section {
