@@ -70,9 +70,9 @@ onUnmounted(() => {
     
     <!-- Action buttons -->
     <div class="hero-actions">
-      <a href="#" class="hero-button">Unsere Zimmer</a>
-      <a href="#" class="hero-button">Tagung</a>
-      <a href="#" class="hero-button">Kontakt</a>
+      <a href="/zimmer" class="hero-button">Unsere Zimmer</a>
+      <a href="/tagung" class="hero-button">Tagung</a>
+      <a href="/kontakt" class="hero-button">Kontakt</a>
     </div>
   </div>
 

@@ -46,8 +46,8 @@ const hostsContent = ref({
 		"– Ein- und Zwei-Personen-Apartments: Für längere Aufenthalte oder Gäste, die sich etwas mehr Platz und Privatsphäre wünschen.",
 	],
 	buttons: [
-		{ text: "ZIMMER", url: "#", type: "dark" },
-		{ text: "KONTAKT", url: "#", type: "light" },
+		{ text: "ZIMMER", url: "/zimmer", type: "dark" },
+		{ text: "KONTAKT", url: "/kontakt", type: "light" },
 	],
 	image: {
 		src: hostsImage,

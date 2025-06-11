@@ -1,7 +1,7 @@
 <template>
 	<div class="room-page">
 		<!-- Hero section with room title overlay -->
-		<section 
+		<section
 			class="hero-section fullwidth-section"
 			:style="{ backgroundImage: `url(${heroBackgroundImage})` }"
 		>
@@ -9,7 +9,7 @@
 				<ContentContainer>
 					<h1 class="hero-title">{{ currentRoom.name?.toUpperCase() }}</h1>
 					<p class="hero-subtitle">
-						{{ currentRoom.category || "HOTEL BURGHOLZ" }}
+						{{ currentRoom.category || "" }}
 					</p>
 				</ContentContainer>
 			</div>
@@ -21,11 +21,11 @@
 				<!-- Room details bar -->
 				<div class="room-details-bar">
 					<div class="detail-item">
-						<h3 class="detail-title">ROOM SIZE</h3>
+						<h3 class="detail-title">GRÖSSE</h3>
 						<p class="detail-value">{{ currentRoom.size }}</p>
 					</div>
 					<div class="detail-item">
-						<h3 class="detail-title">PERSONS</h3>
+						<h3 class="detail-title">BELEGUNG</h3>
 						<p class="detail-value">{{ currentRoom.capacity }}</p>
 					</div>
 					<div class="detail-item">
@@ -111,7 +111,7 @@
 				<!-- Booking button -->
 				<div class="booking-container">
 					<router-link :to="'/buchen/' + roomId" class="booking-button">
-						Book now with a guaranteed price
+						Book now
 					</router-link>
 				</div>
 
@@ -129,7 +129,7 @@
 						</ul>
 					</div>
 					<div class="features-column">
-						<h3 class="features-title">Room equipment and special features</h3>
+						<h3 class="features-title">Zimmerausstatung</h3>
 						<ul class="features-list">
 							<li
 								v-for="(feature, index) in roomFeatures"
@@ -159,7 +159,7 @@ const currentImageIndex = ref(0);
 const rooms = {
 	einzelzimmer: {
 		name: "Einzelzimmer",
-		category: "Zimmer",
+		category: "",
 		tagline: "Gemütliche Atmosphäre für Einzelreisende",
 		images: [
 			new URL("@/assets/images/einzelzimmer1.jpg", import.meta.url).href,
@@ -172,12 +172,11 @@ const rooms = {
 		price: "ab 112,– €",
 		size: "16 m²",
 		services: [
-			"Reichhaltiges Frühstücksbuffet von 7 bis 10 Uhr",
+			"Reichhaltiges Frühstücksbuffet",
 			"Kostenfreies WLAN mit Glasfaseranschluss",
 			"Tägliche Zimmerreinigung",
 			"Parkplatz am Hotel kostenfrei",
-			"Gepäckservice",
-			"Weckservice auf Anfrage",
+			// "Gepäckservice",
 		],
 		features: [
 			"Klimaanlage mit individueller Steuerung",
@@ -187,14 +186,14 @@ const rooms = {
 			"Flat-TV mit Satellitenprogrammen",
 			"Minibar mit Erfrischungsgetränken",
 			"Modernes Badezimmer mit Dusche und WC",
-			"Haartrockner und Kosmetikspiegel",
+			"Haartrockner",
 			"Hochwertige Pflegeprodukte",
 			"Kofferablage",
 		],
 	},
 	doppelzimmer: {
 		name: "Doppelzimmer",
-		category: "Zimmer",
+		category: "",
 		tagline: "Komfort und Funktionalität für zwei Personen",
 		images: [
 			new URL("@/assets/images/doppelzimmer2.jpg", import.meta.url).href,
@@ -206,13 +205,11 @@ const rooms = {
 		price: "ab 140,– €",
 		size: "25 m²",
 		services: [
-			"Reichhaltiges Frühstücksbuffet von 7 bis 10 Uhr",
+			"Reichhaltiges Frühstücksbuffet",
 			"Kostenfreies WLAN mit Glasfaseranschluss",
 			"Tägliche Zimmerreinigung",
 			"Parkplatz am Hotel kostenfrei",
-			"Gepäckservice",
-			"Weckservice auf Anfrage",
-			"Wäscheservice auf Anfrage",
+			// "Gepäckservice",
 		],
 		features: [
 			"Klimaanlage mit individueller Steuerung",
@@ -223,14 +220,14 @@ const rooms = {
 			"Flat-TV mit Satellitenprogrammen",
 			"Minibar mit Erfrischungsgetränken",
 			"Modernes Badezimmer mit Dusche und WC",
-			"Haartrockner und Kosmetikspiegel",
+			"Haartrockner",
 			"Hochwertige Pflegeprodukte",
 			"Kofferablage",
 		],
 	},
 	apartment: {
 		name: "Apartment",
-		category: "Apartments",
+		category: "",
 		tagline: "Großzügiger Wohnraum mit separatem Schlafzimmer",
 		images: [
 			new URL("@/assets/images/apartment1.jpg", import.meta.url).href,
@@ -248,7 +245,7 @@ const rooms = {
 			"Kostenfreies WLAN mit Glasfaseranschluss",
 			"Tägliche Reinigung",
 			"Kostenloser Parkplatz",
-			"Gepäckservice",
+			// "Gepäckservice",
 			"Wäscheservice auf Anfrage",
 		],
 		features: [
@@ -260,14 +257,14 @@ const rooms = {
 			"Eigene Terrasse",
 			"Flat-TV",
 			"Modernes Badezimmer mit Dusche und WC",
-			"Haartrockner und Kosmetikspiegel",
+			"Haartrockner",
 			"Hochwertige Pflegeprodukte",
 			"Klimaanlage",
 		],
 	},
 	studioApartment: {
 		name: "Studio Apartment",
-		category: "Studio",
+		category: "",
 		tagline: "Luxuriöser Komfort auf großzügiger Fläche",
 		images: [
 			new URL("@/assets/images/studio.jpg", import.meta.url).href,
@@ -286,7 +283,7 @@ const rooms = {
 			"Kostenfreies WLAN mit Glasfaseranschluss",
 			"Tägliche Reinigung",
 			"Kostenloser Parkplatz",
-			"Gepäckservice",
+			// "Gepäckservice",
 			"Wäscheservice auf Anfrage",
 		],
 		features: [

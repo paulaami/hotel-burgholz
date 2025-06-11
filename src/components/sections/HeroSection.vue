@@ -64,18 +64,18 @@
 		</div>
 
 		<!-- Action buttons -->
-		<div class="hero-actions">
-			<ContentContainer>
-				<a
-					v-for="button in heroContent.buttons"
-					:key="button.text"
-					:href="button.url"
-					class="hero-button"
-				>
-					{{ button.text }}
-				</a>
-			</ContentContainer>
-		</div>
+<div class="hero-actions">
+	<ContentContainer>
+		<router-link
+			v-for="button in heroContent.buttons"
+			:key="button.text"
+			:to="button.url"
+			class="hero-button"
+		>
+			{{ button.text }}
+		</router-link>
+	</ContentContainer>
+</div>
 	</section>
 </template>
 
@@ -89,9 +89,9 @@ const heroContent = ref({
 	title: "",
 	subtitle: "",
 	buttons: [
-		{ text: "Zimmer", url: "#" },
-		{ text: "Tagung", url: "#" },
-		{ text: "Kontakt", url: "#" },
+		{ text: "Zimmer", url: "/zimmer" },
+		{ text: "Tagung", url: "/tagung" },
+		{ text: "Kontakt", url: "/kontakt" },
 	],
 });
 
