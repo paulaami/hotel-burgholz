@@ -96,9 +96,9 @@ const heroContent = ref({
 });
 
 // Slide images and configuration
-import heroImage1 from "@/assets/images/burgholz_hero.jpg";
-import heroImage2 from "@/assets/images/burgholz_hero2.jpg";
-import heroImage3 from "@/assets/images/burgholz_hero3.jpg";
+import heroImage1 from "@/assets/images/Hotel Burgholz_Uschi Kitschke Fotografie-159.jpg";
+import heroImage2 from "@/assets/images/Hotel Burgholz_Uschi Kitschke Fotografie-153.jpg";
+import heroImage3 from "@/assets/images/Hotel Burgholz_Uschi Kitschke Fotografie-137.jpg";
 
 const slides = ref([
 	{

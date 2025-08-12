@@ -110,7 +110,7 @@
 
 				<!-- Booking button -->
 				<div class="booking-container">
-					<router-link :to="'/buchen/' + roomId" class="booking-button">
+					<router-link :to="bookingUrl" class="booking-button">
 						Book now
 					</router-link>
 				</div>
@@ -153,18 +153,43 @@ import ContentContainer from "@/components/layout/ContentContainer.vue";
 const route = useRoute();
 const router = useRouter();
 const roomId = computed(() => route.params.id as string);
+const apartmentId = computed(() => route.params.apartmentId as string);
 const currentImageIndex = ref(0);
 
-// Room data
+// Check if we're on an apartment page
+const isApartmentPage = computed(() => route.path.includes("/apartment/"));
+
+// Regular room data
 const rooms = {
 	einzelzimmer: {
 		name: "Einzelzimmer",
 		category: "",
 		tagline: "Gemütliche Atmosphäre für Einzelreisende",
 		images: [
-			new URL("@/assets/images/einzelzimmer1.jpg", import.meta.url).href,
-			new URL("@/assets/images/einzelzimmer2.jpg", import.meta.url).href,
-			new URL("@/assets/images/einzelzimmer3.jpg", import.meta.url).href,
+			new URL(
+				"@/assets/images/einzelzimmer/Hotel Burgholz_Uschi Kitschke Fotografie-1.jpg",
+				import.meta.url
+			).href,
+			new URL(
+				"@/assets/images/einzelzimmer/Hotel Burgholz_Uschi Kitschke Fotografie-5.jpg",
+				import.meta.url
+			).href,
+			new URL(
+				"@/assets/images/shared/Hotel Burgholz_Uschi Kitschke Fotografie-6.jpg",
+				import.meta.url
+			).href,
+			new URL(
+				"@/assets/images/shared/Hotel Burgholz_Uschi Kitschke Fotografie-11.jpg",
+				import.meta.url
+			).href,
+			new URL(
+				"@/assets/images/shared/Hotel Burgholz_Uschi Kitschke Fotografie-22.jpg",
+				import.meta.url
+			).href,
+			new URL(
+				"@/assets/images/shared/Hotel Burgholz_Uschi Kitschke Fotografie-24.jpg",
+				import.meta.url
+			).href,
 		],
 		description:
 			"Unser Einzelzimmer ist ideal für Geschäftsreisende und Radfahrer und bietet eine helle und gemütliche Atmosphäre auf etwa 16 m². Ausgestattet mit einer Klimaanlage sorgt es für angenehme Temperaturen. Ein praktischer Schreibtisch und ein Flat-TV stehen zur Verfügung, während das kostenfreie WLAN mit Glasfaseranschluss schnelle Internetverbindungen garantiert. Für zusätzlichen Komfort gibt es eine Kofferablage und eine Mini-Bar. Das moderne Badezimmer verfügt über eine Dusche und ein WC. Das extra breite Bett misst 120cm x 200cm und kann auf Wunsch auch in der Überlänge von 120cm x 210 cm bereitgestellt werden. Dieses Einzelzimmer kombiniert Komfort und Funktionalität und bietet den perfekten Rückzugsort während Ihres Aufenthalts.",
@@ -176,7 +201,6 @@ const rooms = {
 			"Kostenfreies WLAN mit Glasfaseranschluss",
 			"Tägliche Zimmerreinigung",
 			"Parkplatz am Hotel kostenfrei",
-			// "Gepäckservice",
 		],
 		features: [
 			"Klimaanlage mit individueller Steuerung",
@@ -196,8 +220,30 @@ const rooms = {
 		category: "",
 		tagline: "Komfort und Funktionalität für zwei Personen",
 		images: [
-			new URL("@/assets/images/doppelzimmer2.jpg", import.meta.url).href,
-			new URL("@/assets/images/doppelzimmer.jpg", import.meta.url).href,
+			new URL(
+				"@/assets/images/doppelzimmer/Hotel Burgholz_Uschi Kitschke Fotografie-27.jpg",
+				import.meta.url
+			).href,
+			new URL(
+				"@/assets/images/doppelzimmer/Hotel Burgholz_Uschi Kitschke Fotografie-31.jpg",
+				import.meta.url
+			).href,
+			new URL(
+				"@/assets/images/shared/Hotel Burgholz_Uschi Kitschke Fotografie-6.jpg",
+				import.meta.url
+			).href,
+			new URL(
+				"@/assets/images/shared/Hotel Burgholz_Uschi Kitschke Fotografie-11.jpg",
+				import.meta.url
+			).href,
+			new URL(
+				"@/assets/images/shared/Hotel Burgholz_Uschi Kitschke Fotografie-22.jpg",
+				import.meta.url
+			).href,
+			new URL(
+				"@/assets/images/shared/Hotel Burgholz_Uschi Kitschke Fotografie-24.jpg",
+				import.meta.url
+			).href,
 		],
 		description:
 			"Das Doppelzimmer ist ideal für Geschäftsreisende und Radfahrer und bietet eine helle und gemütliche Atmosphäre auf etwa 25 m². Ausgestattet mit einer Klimaanlage sorgt es für angenehme Temperaturen. Ein praktischer Schreibtisch und ein Flat-TV stehen zur Verfügung, während das kostenfreie WLAN mit Glasfaseranschluss schnelle Internetverbindungen garantiert. Für zusätzlichen Komfort gibt es eine gemütliche Sitzgelegenheit, eine Kofferablage und eine Mini-Bar. Das moderne Badezimmer verfügt über eine Dusche und ein WC. Die Einzelbetten messen 100 x 200 cm und sind auf Wunsch auch in der Überlänge von 100 x 210 cm erhältlich. Dieses Doppelzimmer kombiniert Komfort und Funktionalität und bietet den perfekten Rückzugsort während Ihres Aufenthalts.",
@@ -209,7 +255,6 @@ const rooms = {
 			"Kostenfreies WLAN mit Glasfaseranschluss",
 			"Tägliche Zimmerreinigung",
 			"Parkplatz am Hotel kostenfrei",
-			// "Gepäckservice",
 		],
 		features: [
 			"Klimaanlage mit individueller Steuerung",
@@ -223,43 +268,6 @@ const rooms = {
 			"Haartrockner",
 			"Hochwertige Pflegeprodukte",
 			"Kofferablage",
-		],
-	},
-	apartment: {
-		name: "Apartment",
-		category: "",
-		tagline: "Großzügiger Wohnraum mit separatem Schlafzimmer",
-		images: [
-			new URL("@/assets/images/apartment1.jpg", import.meta.url).href,
-			new URL("@/assets/images/apartment2.jpg", import.meta.url).href,
-			new URL("@/assets/images/apartment3.jpg", import.meta.url).href,
-			new URL("@/assets/images/apartment4.jpg", import.meta.url).href,
-		],
-		description:
-			"Die Apartments bieten für zwei Personen eine komfortable Unterkunft auf 36 m². Jedes Apartment verfügt über separate Schlafzimmer, die Privatsphäre und Ruhe gewährleisten. Die Schlafzimmer sind mit einem luxuriösen Boxspringbett ausgestattet, das eine Größe von 180 x 200 cm hat und für erholsamen Schlaf sorgt. Das Bad ist modern und gut ausgestattet. Das Wohnzimmer lädt mit einem Flat TV zum Entspannen ein und geht nahtlos in den Essbereich über, der ausreichend Platz für gemütliche Mahlzeiten bietet. Eine gut ausgestattete Küchenzeile ermöglicht es den Gästen, sich selbst zu verpflegen. Darüber hinaus gehört zu jedem Apartment eine Terrasse, die zum Verweilen im Freien einlädt. Kostenloses WLAN mit Glasfaser sorgt für schnelle und zuverlässige Internetverbindungen.",
-		capacity: "2 Personen",
-		price: "ab 160,– €",
-		size: "36 m²",
-		services: [
-			"Wahlweise Frühstücksbuffet buchbar",
-			"Kostenfreies WLAN mit Glasfaseranschluss",
-			"Tägliche Reinigung",
-			"Kostenloser Parkplatz",
-			// "Gepäckservice",
-			"Wäscheservice auf Anfrage",
-		],
-		features: [
-			"Separates Schlafzimmer",
-			"Luxuriöses Boxspringbett (180 × 200 cm)",
-			"Wohnzimmer mit gemütlichem Sitzbereich",
-			"Essbereich für gemütliche Mahlzeiten",
-			"Voll ausgestattete Küchenzeile",
-			"Eigene Terrasse",
-			"Flat-TV",
-			"Modernes Badezimmer mit Dusche und WC",
-			"Haartrockner",
-			"Hochwertige Pflegeprodukte",
-			"Klimaanlage",
 		],
 	},
 	studioApartment: {
@@ -283,7 +291,6 @@ const rooms = {
 			"Kostenfreies WLAN mit Glasfaseranschluss",
 			"Tägliche Reinigung",
 			"Kostenloser Parkplatz",
-			// "Gepäckservice",
 			"Wäscheservice auf Anfrage",
 		],
 		features: [
@@ -302,19 +309,173 @@ const rooms = {
 	},
 };
 
+// Apartment data
+const apartments = {
+	einzelzimmer: {
+		name: "Apartment Einzelzimmer",
+		category: "Apartment",
+		tagline: "Komfortables Apartment für eine Person",
+		images: [
+			new URL(
+				"@/assets/images/apartament/einzelzimmer/Hotel Burgholz_Uschi Kitschke Fotografie-100.jpg",
+				import.meta.url
+			).href,
+			new URL(
+				"@/assets/images/apartament/einzelzimmer/Hotel Burgholz_Uschi Kitschke Fotografie-56.jpg",
+				import.meta.url
+			).href,
+			new URL(
+				"@/assets/images/apartament/Hotel Burgholz_Uschi Kitschke Fotografie-58.jpg",
+				import.meta.url
+			).href,
+			new URL(
+				"@/assets/images/apartament/Hotel Burgholz_Uschi Kitschke Fotografie-65.jpg",
+				import.meta.url
+			).href,
+			new URL(
+				"@/assets/images/apartament/Hotel Burgholz_Uschi Kitschke Fotografie-70.jpg",
+				import.meta.url
+			).href,
+			new URL(
+				"@/assets/images/apartament/Hotel Burgholz_Uschi Kitschke Fotografie-74.jpg",
+				import.meta.url
+			).href,
+			new URL(
+				"@/assets/images/apartament/Hotel Burgholz_Uschi Kitschke Fotografie-75.jpg",
+				import.meta.url
+			).href,
+			new URL(
+				"@/assets/images/apartament/Hotel Burgholz_Uschi Kitschke Fotografie-82.jpg",
+				import.meta.url
+			).href,
+			new URL(
+				"@/assets/images/apartament/Hotel Burgholz_Uschi Kitschke Fotografie-85.jpg",
+				import.meta.url
+			).href,
+		],
+		description:
+			"Das Apartment Einzelzimmer bietet auf 30 m² eine komfortable Unterkunft für eine Person. Es verfügt über ein separates Schlafzimmer mit einem komfortablen Einzelbett, das Privatsphäre und Ruhe gewährleistet. Das moderne Badezimmer ist gut ausgestattet. Der Wohnbereich lädt mit einem Flat-TV zum Entspannen ein und geht nahtlos in den Essbereich über. Eine gut ausgestattete Küchenzeile ermöglicht es, sich selbst zu verpflegen. Darüber hinaus gehört zu diesem Apartment eine gemütliche Terrasse. Kostenloses WLAN mit Glasfaser sorgt für schnelle und zuverlässige Internetverbindungen.",
+		capacity: "1 Person",
+		price: "ab 140,– €",
+		size: "30 m²",
+		services: [
+			"Wahlweise Frühstücksbuffet buchbar",
+			"Kostenfreies WLAN mit Glasfaseranschluss",
+			"Tägliche Reinigung",
+			"Kostenloser Parkplatz",
+			"Wäscheservice auf Anfrage",
+		],
+		features: [
+			"Separates Schlafzimmer",
+			"Komfortables Einzelbett",
+			"Wohnzimmer mit gemütlichem Sitzbereich",
+			"Essbereich",
+			"Gut ausgestattete Küchenzeile",
+			"Eigene Terrasse",
+			"Flat-TV",
+			"Modernes Badezimmer mit Dusche und WC",
+			"Haartrockner",
+			"Hochwertige Pflegeprodukte",
+			"Klimaanlage",
+		],
+	},
+	doppelzimmer: {
+		name: "Apartment Doppelzimmer",
+		category: "Apartment",
+		tagline: "Großzügiger Wohnraum mit separatem Schlafzimmer",
+		images: [
+			new URL(
+				"@/assets/images/apartament/doppelzimmer/Hotel Burgholz_Uschi Kitschke Fotografie-72.jpg",
+				import.meta.url
+			).href,
+			new URL(
+				"@/assets/images/apartament/doppelzimmer/Hotel Burgholz_Uschi Kitschke Fotografie-80.jpg",
+				import.meta.url
+			).href,
+			new URL(
+				"@/assets/images/apartament/doppelzimmer/Hotel Burgholz_Uschi Kitschke Fotografie-88.jpg",
+				import.meta.url
+			).href,
+			new URL(
+				"@/assets/images/apartament/Hotel Burgholz_Uschi Kitschke Fotografie-58.jpg",
+				import.meta.url
+			).href,
+			new URL(
+				"@/assets/images/apartament/Hotel Burgholz_Uschi Kitschke Fotografie-65.jpg",
+				import.meta.url
+			).href,
+			new URL(
+				"@/assets/images/apartament/Hotel Burgholz_Uschi Kitschke Fotografie-70.jpg",
+				import.meta.url
+			).href,
+			new URL(
+				"@/assets/images/apartament/Hotel Burgholz_Uschi Kitschke Fotografie-74.jpg",
+				import.meta.url
+			).href,
+			new URL(
+				"@/assets/images/apartament/Hotel Burgholz_Uschi Kitschke Fotografie-75.jpg",
+				import.meta.url
+			).href,
+			new URL(
+				"@/assets/images/apartament/Hotel Burgholz_Uschi Kitschke Fotografie-82.jpg",
+				import.meta.url
+			).href,
+			new URL(
+				"@/assets/images/apartament/Hotel Burgholz_Uschi Kitschke Fotografie-85.jpg",
+				import.meta.url
+			).href,
+		],
+		description:
+			"Das Apartment Doppelzimmer bietet für zwei Personen eine komfortable Unterkunft auf 36 m². Es verfügt über ein separates Schlafzimmer mit einem luxuriösen Boxspringbett (180 x 200 cm), das Privatsphäre und Ruhe gewährleistet. Das moderne Badezimmer ist gut ausgestattet. Der Wohnbereich lädt mit einem Flat-TV zum Entspannen ein und geht nahtlos in den Essbereich über, der ausreichend Platz für gemütliche Mahlzeiten bietet. Eine voll ausgestattete Küchenzeile ermöglicht es den Gästen, sich selbst zu verpflegen. Darüber hinaus gehört zu jedem Apartment eine Terrasse, die zum Verweilen im Freien einlädt. Kostenloses WLAN mit Glasfaser sorgt für schnelle und zuverlässige Internetverbindungen.",
+		capacity: "2 Personen",
+		price: "ab 160,– €",
+		size: "36 m²",
+		services: [
+			"Wahlweise Frühstücksbuffet buchbar",
+			"Kostenfreies WLAN mit Glasfaseranschluss",
+			"Tägliche Reinigung",
+			"Kostenloser Parkplatz",
+			"Wäscheservice auf Anfrage",
+		],
+		features: [
+			"Separates Schlafzimmer",
+			"Luxuriöses Boxspringbett (180 × 200 cm)",
+			"Wohnzimmer mit gemütlichem Sitzbereich",
+			"Essbereich für gemütliche Mahlzeiten",
+			"Voll ausgestattete Küchenzeile",
+			"Eigene Terrasse",
+			"Flat-TV",
+			"Modernes Badezimmer mit Dusche und WC",
+			"Haartrockner",
+			"Hochwertige Pflegeprodukte",
+			"Klimaanlage",
+		],
+	},
+};
+
 // Current room computed property
 const currentRoom = computed(() => {
-	if (!roomId.value || !rooms[roomId.value]) {
-		router.push("/zimmer"); // Redirect to rooms overview if ID is invalid
-		return {};
+	if (isApartmentPage.value) {
+		// We're on an apartment detail page
+		if (!apartmentId.value || !apartments[apartmentId.value]) {
+			router.push("/zimmer/apartment"); // Redirect to apartment overview if ID is invalid
+			return {};
+		}
+		return apartments[apartmentId.value];
+	} else {
+		// We're on a regular room detail page
+		if (!roomId.value || !rooms[roomId.value]) {
+			router.push("/zimmer"); // Redirect to rooms overview if ID is invalid
+			return {};
+		}
+		return rooms[roomId.value];
 	}
-	return rooms[roomId.value];
 });
 
-// Hero background image - uses the first image from the room's image array
+// Hero background image - uses the second image from the room's image array
 const heroBackgroundImage = computed(() => {
 	if (currentRoom.value.images && currentRoom.value.images.length > 0) {
-		return currentRoom.value.images[0]; // You can change this to use any index you prefer
+		return currentRoom.value.images[1] || currentRoom.value.images[0]; // Use second image, fallback to first
 	}
 	// Fallback to the original Unsplash image if no room images are available
 	return "https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80";
@@ -323,6 +484,15 @@ const heroBackgroundImage = computed(() => {
 // Services and features
 const roomServices = computed(() => currentRoom.value.services || []);
 const roomFeatures = computed(() => currentRoom.value.features || []);
+
+// Booking URL
+const bookingUrl = computed(() => {
+	if (isApartmentPage.value) {
+		return `/buchen/apartment/${apartmentId.value}`;
+	} else {
+		return `/buchen/${roomId.value}`;
+	}
+});
 
 // Carousel navigation methods
 const totalImages = computed(() => currentRoom.value.images?.length || 0);
@@ -345,14 +515,20 @@ const goToImage = (index) => {
 };
 
 // Reset carousel when room changes
-watch(roomId, () => {
+watch([roomId, apartmentId], () => {
 	currentImageIndex.value = 0;
 });
 
 // Check if room exists on mount
 onMounted(() => {
-	if (roomId.value && !rooms[roomId.value]) {
-		router.push("/zimmer");
+	if (isApartmentPage.value) {
+		if (apartmentId.value && !apartments[apartmentId.value]) {
+			router.push("/zimmer/apartment");
+		}
+	} else {
+		if (roomId.value && !rooms[roomId.value]) {
+			router.push("/zimmer");
+		}
 	}
 });
 </script>

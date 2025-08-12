@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
-// import { getDefaultLanguage, SUPPORTED_LANGUAGES } from '@/i18n';
 import HomePage from "@/views/HomePage.vue";
 import ZimmerOverviewPage from "@/views/ZimmerOverviewPage.vue";
+import ApartmentOverviewPage from "@/views/ApartmentOverviewPage.vue"; // New import
 import RoomPage from "@/views/RoomPage.vue";
 import TagungPage from "@/views/TagungPage.vue";
 import BikeTourPage from "@/views/BikeTourPage.vue";
@@ -16,26 +16,50 @@ const routes = [
 	},
 	{
 		path: "/zimmer",
-		name: "room", // Changed to match your navigation component
+		name: "room",
 		component: ZimmerOverviewPage,
 		meta: {
-			activeMenu: "room", // Changed to match your navigation component
+			activeMenu: "room",
+		},
+	},
+	{
+		path: "/zimmer/apartment",
+		name: "apartment-overview",
+		component: ApartmentOverviewPage, // New apartment overview page
+		meta: {
+			activeMenu: "room",
+		},
+	},
+	{
+		path: "/zimmer/apartment/:apartmentId",
+		name: "apartment-detail",
+		component: RoomPage, // Same component, will handle apartments
+		meta: {
+			activeMenu: "room",
+		},
+	},
+	{
+		path: "/zimmer/:id",
+		name: "room-detail",
+		component: RoomPage,
+		meta: {
+			activeMenu: "room",
 		},
 	},
 	{
 		path: "/tagung",
-		name: "restaurant", // Changed to match your navigation component
+		name: "restaurant",
 		component: TagungPage,
 		meta: {
-			activeMenu: "restaurant", // Changed to match your navigation component
+			activeMenu: "restaurant",
 		},
 	},
 	{
 		path: "/energy-star",
-		name: "energy-star", // Changed to match your navigation component
+		name: "energy-star",
 		component: EnergyStar,
 		meta: {
-			activeMenu: "energy-star", // Changed to match your navigation component
+			activeMenu: "energy-star",
 		},
 	},
 	{
@@ -52,14 +76,6 @@ const routes = [
 		component: KontaktPage,
 		meta: {
 			activeMenu: "kontakt",
-		},
-	},
-	{
-		path: "/zimmer/:id",
-		name: "room-detail",
-		component: RoomPage,
-		meta: {
-			activeMenu: "room",
 		},
 	},
 ];

@@ -196,8 +196,8 @@
 import { ref } from "vue";
 import ContentContainer from "@/components/layout/ContentContainer.vue";
 import bikeMain from "@/assets/images/bike.jpg";
-import bikeTwo from "@/assets/images/bike2.jpg";
-import bikeThree from "@/assets/images/bike3.jpg";
+import bikeTwo from "@/assets/images/BikeTours/Hotel Burgholz_Uschi Kitschke Fotografie-103.jpg";
+import bikeThree from "@/assets/images/BikeTours/Hotel Burgholz_Uschi Kitschke Fotografie-105.jpg";
 import bikeFour from "@/assets/images/bike4.jpg";
 import bikeFive from "@/assets/images/bike5.jpg";
 

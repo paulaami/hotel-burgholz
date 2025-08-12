@@ -147,9 +147,27 @@
 		<div class="footer-bottom">
 			<div class="container">
 				<div class="legal-links">
-					<a href="#" class="legal-link">Datenschutz</a>
-					<a href="#" class="legal-link">Impressum</a>
-					<a href="#" class="legal-link">Datenschutzeinstellungen</a>
+					<a
+						href="/hotel-burgholz/documents/dsg-hotel-burgholz-2025-verarbeitungsverzeichnis-de-21072025-1235.pdf"
+						class="legal-link"
+						target="_blank"
+						rel="noopener noreferrer"
+						>Datenschutz</a
+					>
+					<a
+						href="/hotel-burgholz/documents/dsg-hotel-burgholz-2025-impressum-de-21072025-1322.pdf"
+						class="legal-link"
+						target="_blank"
+						rel="noopener noreferrer"
+						>Impressum</a
+					>
+					<a
+						href="/hotel-burgholz/documents/dsg-hotel-burgholz-2025-dse-de-21072025-1250.pdf"
+						class="legal-link"
+						target="_blank"
+						rel="noopener noreferrer"
+						>Datenschutzeinstellungen</a
+					>
 				</div>
 			</div>
 		</div>

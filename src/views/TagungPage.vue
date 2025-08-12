@@ -38,7 +38,10 @@
 						</div>
 					</div>
 					<div class="description-image">
-						<img src="@/assets/images/Konferrenz2.jpg" alt="Tagungsraum" />
+						<img
+							src="@/assets/images/Tagungsraum/Hotel Burgholz_Uschi Kitschke Fotografie-126.jpg"
+							alt="Tagungsraum"
+						/>
 					</div>
 				</div>
 			</ContentContainer>
@@ -221,9 +224,22 @@ const isDetailsActive = ref(false);
 
 // Conference room images - replace with your actual images
 const conferenceRoomImages = [
-	new URL("@/assets/images/Konferrenz3.jpg", import.meta.url).href,
-	new URL("@/assets/images/Konferrenz4.jpg", import.meta.url).href,
-	new URL("@/assets/images/Konferrenz5.jpg", import.meta.url).href,
+	new URL(
+		"@/assets/images/Tagungsraum/Hotel Burgholz_Uschi Kitschke Fotografie-108.jpg",
+		import.meta.url
+	).href,
+	new URL(
+		"@/assets/images/Tagungsraum/Hotel Burgholz_Uschi Kitschke Fotografie-116.jpg",
+		import.meta.url
+	).href,
+	new URL(
+		"@/assets/images/Tagungsraum/Hotel Burgholz_Uschi Kitschke Fotografie-120.jpg",
+		import.meta.url
+	).href,
+	new URL(
+		"@/assets/images/Tagungsraum/Hotel Burgholz_Uschi Kitschke Fotografie-126.jpg",
+		import.meta.url
+	).href,
 	// new URL("@/assets/images/Konferrenz6.jpg", import.meta.url).href,
 ];
 

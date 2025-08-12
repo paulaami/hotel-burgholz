@@ -283,7 +283,7 @@ const submitForm = () => {
 	width: 100%;
 	height: 60vh;
 	min-height: 400px;
-	background-image: url('@/assets/images/burgholz_hero2.jpg');
+	background-image: url("@/assets/images/Hotel Burgholz_Uschi Kitschke Fotografie-150.jpg");
 	background-size: cover;
 	background-position: center;
 	display: flex;

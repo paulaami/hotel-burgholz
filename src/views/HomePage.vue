@@ -12,8 +12,8 @@ import { ref } from "vue";
 import HeroSection from "@/components/sections/HeroSection.vue";
 import DescriptionSection from "@/components/sections/DescriptionSection.vue";
 import FeatureLinksSection from "@/components/sections/FeatureLinksSection.vue";
-import uberUnsImage from "@/assets/images/uber_uns.jpg";
-import hostsImage from "@/assets/images/apartment1.jpg";
+import uberUnsImage from "@/assets/images/Hotel Burgholz_Uschi Kitschke Fotografie-174.jpg";
+import hostsImage from "@/assets/images/doppelzimmer2.jpg";
 // Content for the "About Hotel" section
 const aboutContent = ref({
 	subtitle: "Über uns",

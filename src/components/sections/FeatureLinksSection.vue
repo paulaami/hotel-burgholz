@@ -19,7 +19,7 @@
 import { ref } from "vue";
 import FeatureCard from "@/components/ui/FeatureCard.vue";
 import ContentContainer from "@/components/layout/ContentContainer.vue";
-import zimmer from "@/assets/images/apartment1.jpg";
+import zimmer from "@/assets/images/einzelzimmer/Hotel Burgholz_Uschi Kitschke Fotografie-5.jpg";
 import bike from "@/assets/images/bike.jpg";
 import restaurant from "@/assets/images/restaurant.jpg";
 
