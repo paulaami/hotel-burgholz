@@ -51,7 +51,11 @@
 								<line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
 							</svg>
 						</a>
-						<a href="#" class="social-icon" aria-label="WhatsApp">
+						<a
+							href="https://wa.me/4917623896507"
+							class="social-icon"
+							aria-label="WhatsApp"
+						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								viewBox="0 0 24 24"

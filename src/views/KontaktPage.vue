@@ -63,11 +63,19 @@
 						</p>
 
 						<div class="contact-direct">
-							<a href="tel:07803 93480" class="contact-phone">07803 93480</a>
+							<a href="tel:+4924215589200" class="contact-phone"
+								>+49 (0) 2421 558 92 00</a
+							>
+							<a href="tel:+4917623896507" class="contact-phone"
+								>+49 (0) 176 238 965 07</a
+							>
+							<a href="mailto:kontakt@hotel-burgholz.de" class="contact-email"
+								>kontakt@hotel-burgholz.de</a
+							>
 							<a
-								href="mailto:info@hotelburgholz-gengenbach.de"
+								href="mailto:reservierung@hotel-burgholz.de"
 								class="contact-email"
-								>info@hotelburgholz-gengenbach.de</a
+								>reservierung@hotel-burgholz.de</a
 							>
 						</div>
 					</div>
@@ -176,11 +184,11 @@
 				<div class="location-social-grid">
 					<div class="location-info">
 						<h3 class="section-title">Unser Standort</h3>
-						<p>
+						<!-- <p>
 							Das Hotel Burgholz liegt eingebettet in die idyllische Landschaft
 							des Mittleren Schwarzwaldes, nur wenige Minuten vom historischen
 							Stadtkern Gengenbachs entfernt.
-						</p>
+						</p> -->
 
 						<div class="hotel-address">
 							<p><strong>Hotel Burgholz</strong></p>

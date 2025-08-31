@@ -6,7 +6,7 @@
 				<ContentContainer>
 					<h1 class="hero-title">ZIMMER & SUITEN</h1>
 					<p class="hero-subtitle">
-						Erholung und Komfort im Herzen des Schwarzwaldes
+						Erholung und Komfort im Herzen der Nordeifel
 					</p>
 				</ContentContainer>
 			</div>
@@ -40,10 +40,10 @@
 
 							<div class="room-actions">
 								<router-link :to="'/zimmer/' + key" class="read-more-button">
-									read more
+									Zimmerdetails
 								</router-link>
 								<router-link :to="'/buchen/' + key" class="booking-button">
-									Book
+									Buchen
 								</router-link>
 							</div>
 						</div>
@@ -69,7 +69,7 @@ const truncatedDescription = (text) => {
 const rooms = {
 	einzelzimmer: {
 		name: "Einzelzimmer",
-		category: "Zimmer overview",
+		category: "",
 		images: [
 			new URL("@/assets/images/einzelzimmer1.jpg", import.meta.url).href,
 			new URL("@/assets/images/einzelzimmer2.jpg", import.meta.url).href,
@@ -83,7 +83,7 @@ const rooms = {
 	},
 	doppelzimmer: {
 		name: "Doppelzimmer",
-		category: "Zimmer overview",
+		category: "",
 		images: [
 			new URL("@/assets/images/doppelzimmer2.jpg", import.meta.url).href,
 			new URL("@/assets/images/doppelzimmer.jpg", import.meta.url).href,
@@ -96,7 +96,7 @@ const rooms = {
 	},
 	apartment: {
 		name: "Apartment",
-		category: "Apartments overview",
+		category: " ",
 		images: [
 			new URL(
 				"@/assets/images/apartament/doppelzimmer/Hotel Burgholz_Uschi Kitschke Fotografie-80.jpg",
@@ -114,7 +114,7 @@ const rooms = {
 	},
 	studioApartment: {
 		name: "Studio Apartment",
-		category: "Studio overview",
+		category: "",
 		images: [
 			new URL("@/assets/images/studio2.jpg", import.meta.url).href,
 			new URL("@/assets/images/studio.jpg", import.meta.url).href,
@@ -125,7 +125,7 @@ const rooms = {
 		description:
 			"Das Studio Apartment bietet auf einer großzügigen Fläche von circa 64 m² luxuriösen Komfort und moderne Annehmlichkeiten. Mit zwei gemütlichen Schlafzimmern für entspannende Nachtruhe.",
 		capacity: "1-2 Personen",
-		price: "Ab 130,– / Nacht",
+		price: "Ab 145,– / Nacht",
 		size: "28 m²",
 	},
 };

@@ -8,8 +8,8 @@
 			<div class="hero-content">
 				<ContentContainer>
 					<h1 class="hero-title">{{ currentRoom.name?.toUpperCase() }}</h1>
-					<p class="hero-subtitle">
-						{{ currentRoom.category || "" }}
+					<p v-if="currentRoom.category" class="hero-subtitle">
+						{{ currentRoom.category }}
 					</p>
 				</ContentContainer>
 			</div>
@@ -29,7 +29,7 @@
 						<p class="detail-value">{{ currentRoom.capacity }}</p>
 					</div>
 					<div class="detail-item">
-						<h3 class="detail-title">ROOM PRICE PER NIGHT</h3>
+						<h3 class="detail-title">ZIMMERPREIS PRO NACHT</h3>
 						<p class="detail-value">{{ currentRoom.price }}</p>
 					</div>
 				</div>
@@ -101,7 +101,7 @@
 				<!-- Room description -->
 				<div class="room-description-container">
 					<h2 class="description-title">
-						{{ currentRoom.tagline || "Komfort und Erholung im Schwarzwald" }}
+						{{ currentRoom.tagline || "Komfort und Erholung in der Nordeifel" }}
 					</h2>
 					<div class="description-content">
 						<p>{{ currentRoom.description }}</p>
@@ -111,7 +111,7 @@
 				<!-- Booking button -->
 				<div class="booking-container">
 					<router-link :to="bookingUrl" class="booking-button">
-						Book now
+						Buchen
 					</router-link>
 				</div>
 
@@ -194,13 +194,14 @@ const rooms = {
 		description:
 			"Unser Einzelzimmer ist ideal für Geschäftsreisende und Radfahrer und bietet eine helle und gemütliche Atmosphäre auf etwa 16 m². Ausgestattet mit einer Klimaanlage sorgt es für angenehme Temperaturen. Ein praktischer Schreibtisch und ein Flat-TV stehen zur Verfügung, während das kostenfreie WLAN mit Glasfaseranschluss schnelle Internetverbindungen garantiert. Für zusätzlichen Komfort gibt es eine Kofferablage und eine Mini-Bar. Das moderne Badezimmer verfügt über eine Dusche und ein WC. Das extra breite Bett misst 120cm x 200cm und kann auf Wunsch auch in der Überlänge von 120cm x 210 cm bereitgestellt werden. Dieses Einzelzimmer kombiniert Komfort und Funktionalität und bietet den perfekten Rückzugsort während Ihres Aufenthalts.",
 		capacity: "1 Person",
-		price: "ab 112,– €",
+		price: "ab 75,– €",
 		size: "16 m²",
 		services: [
-			"Reichhaltiges Frühstücksbuffet",
 			"Kostenfreies WLAN mit Glasfaseranschluss",
 			"Tägliche Zimmerreinigung",
 			"Parkplatz am Hotel kostenfrei",
+			"Entspannen im Garten",
+			"Grillbereich im Garten",
 		],
 		features: [
 			"Klimaanlage mit individueller Steuerung",
@@ -211,7 +212,7 @@ const rooms = {
 			"Minibar mit Erfrischungsgetränken",
 			"Modernes Badezimmer mit Dusche und WC",
 			"Haartrockner",
-			"Hochwertige Pflegeprodukte",
+			"Pflegeprodukte",
 			"Kofferablage",
 		],
 	},
@@ -248,13 +249,14 @@ const rooms = {
 		description:
 			"Das Doppelzimmer ist ideal für Geschäftsreisende und Radfahrer und bietet eine helle und gemütliche Atmosphäre auf etwa 25 m². Ausgestattet mit einer Klimaanlage sorgt es für angenehme Temperaturen. Ein praktischer Schreibtisch und ein Flat-TV stehen zur Verfügung, während das kostenfreie WLAN mit Glasfaseranschluss schnelle Internetverbindungen garantiert. Für zusätzlichen Komfort gibt es eine gemütliche Sitzgelegenheit, eine Kofferablage und eine Mini-Bar. Das moderne Badezimmer verfügt über eine Dusche und ein WC. Die Einzelbetten messen 100 x 200 cm und sind auf Wunsch auch in der Überlänge von 100 x 210 cm erhältlich. Dieses Doppelzimmer kombiniert Komfort und Funktionalität und bietet den perfekten Rückzugsort während Ihres Aufenthalts.",
 		capacity: "2 Personen",
-		price: "ab 140,– €",
+		price: "ab 105,– €",
 		size: "25 m²",
 		services: [
-			"Reichhaltiges Frühstücksbuffet",
 			"Kostenfreies WLAN mit Glasfaseranschluss",
 			"Tägliche Zimmerreinigung",
 			"Parkplatz am Hotel kostenfrei",
+			"Entspannen im Garten",
+			"Grillbereich im Garten",
 		],
 		features: [
 			"Klimaanlage mit individueller Steuerung",
@@ -266,45 +268,44 @@ const rooms = {
 			"Minibar mit Erfrischungsgetränken",
 			"Modernes Badezimmer mit Dusche und WC",
 			"Haartrockner",
-			"Hochwertige Pflegeprodukte",
+			"Pflegeprodukte",
 			"Kofferablage",
 		],
 	},
 	studioApartment: {
 		name: "Studio Apartment",
 		category: "",
-		tagline: "Luxuriöser Komfort auf großzügiger Fläche",
+		tagline: "Komfort auf großzügiger Fläche",
 		images: [
-			new URL("@/assets/images/studio.jpg", import.meta.url).href,
 			new URL("@/assets/images/studio2.jpg", import.meta.url).href,
 			new URL("@/assets/images/studio3.jpg", import.meta.url).href,
+			new URL("@/assets/images/studio.jpg", import.meta.url).href,
 			new URL("@/assets/images/studio4.jpg", import.meta.url).href,
 			new URL("@/assets/images/studio5.jpg", import.meta.url).href,
 		],
 		description:
-			"Das Studio Apartment bietet auf einer großzügigen Fläche von circa 64 m² luxuriösen Komfort und moderne Annehmlichkeiten. Das Apartment verfügt über zwei gemütliche Schlafzimmer, die jeweils eine entspannende Nachtruhe garantieren. Im Hauptschlafzimmer befindet sich ein komfortables Boxspringbett mit den Maßen 180 x 200 cm, während das zweite Schlafzimmer ein ebenfalls bequemes Bett mit den Maßen 120 x 200 cm bietet. Das stilvoll eingerichtete Bad lädt mit seinen hochwertigen Armaturen und einer großzügigen Dusche zur Entspannung ein. Der Wohnbereich ist geschmackvoll dekoriert und bietet ausreichend Platz zum Entspannen und Verweilen. Ein Essbereich ist ebenfalls vorhanden und eignet sich perfekt für gemeinsame Mahlzeiten. Die vollwertige Küche ist mit modernen Geräten ausgestattet, darunter eine Spülmaschine, die den Aufenthalt noch angenehmer macht. So können Sie sich ganz auf Ihre Erholung konzentrieren, ohne sich um den Abwasch kümmern zu müssen. Eine Terrasse rundet das Angebot ab und bietet einen schönen Ort, um die frische Luft zu genießen oder gemütlich draußen zu sitzen.",
-		capacity: "4 Personen",
-		price: "ab 190,– €",
+			"Das Studio Apartment bietet auf einer großzügigen Fläche von circa 64 m² luxuriösen Komfort und moderne Annehmlichkeiten. Das Apartment verfügt über zwei gemütliche Schlafzimmer, die jeweils eine entspannende Nachtruhe garantieren. Im Hauptschlafzimmer befindet sich ein komfortables Boxspringbett mit den Maßen 180 x 200 cm, während das zweite Schlafzimmer ein ebenfalls bequemes Bett mit den Maßen 120 x 200 cm bietet. Das stilvoll eingerichtete Bad lädt mit seinen hochwertigen Armaturen und einer großzügigen Dusche zur Entspannung ein. Der Wohnbereich ist geschmackvoll dekoriert und bietet ausreichend Platz zum Entspannen und Verweilen. Ein Essbereich ist ebenfalls vorhanden und eignet sich perfekt für gemeinsame Mahlzeiten. Die vollwertige Küche ist mit modernen Geräten ausgestattet. So können Sie sich ganz auf Ihre Erholung konzentrieren, ohne sich um den Abwasch kümmern zu müssen. Eine Terrasse rundet das Angebot ab und bietet einen schönen Ort, um die frische Luft zu genießen oder gemütlich draußen zu sitzen.",
+		capacity: "3 Personen",
+		price: "ab 145,– €",
 		size: "64 m²",
 		services: [
-			"Wahlweise Frühstücksbuffet buchbar",
 			"Kostenfreies WLAN mit Glasfaseranschluss",
 			"Tägliche Reinigung",
 			"Kostenloser Parkplatz",
-			"Wäscheservice auf Anfrage",
+			"Entspannen im Garten",
+			"Grillbereich im Garten",
 		],
 		features: [
 			"Zwei separate Schlafzimmer",
 			"Hauptschlafzimmer mit Boxspringbett (180 × 200 cm)",
 			"Zweites Schlafzimmer mit Bett (120 × 200 cm)",
 			"Großer Wohnbereich",
-			"Essbereich für gemeinsame Mahlzeiten",
+			"Essbereich",
 			"Vollwertige Küche mit Spülmaschine",
 			"Drei Flat-TVs",
 			"Eigene Terrasse",
-			"Stilvolles Bad mit hochwertigen Armaturen",
+			"Stilvolles Bad",
 			"Großzügige Dusche",
-			"Klimaanlage",
 		],
 	},
 };
@@ -312,8 +313,8 @@ const rooms = {
 // Apartment data
 const apartments = {
 	einzelzimmer: {
-		name: "Apartment Einzelzimmer",
-		category: "Apartment",
+		name: "Apartment für eine Person",
+		category: "",
 		tagline: "Komfortables Apartment für eine Person",
 		images: [
 			new URL(
@@ -356,14 +357,14 @@ const apartments = {
 		description:
 			"Das Apartment Einzelzimmer bietet auf 30 m² eine komfortable Unterkunft für eine Person. Es verfügt über ein separates Schlafzimmer mit einem komfortablen Einzelbett, das Privatsphäre und Ruhe gewährleistet. Das moderne Badezimmer ist gut ausgestattet. Der Wohnbereich lädt mit einem Flat-TV zum Entspannen ein und geht nahtlos in den Essbereich über. Eine gut ausgestattete Küchenzeile ermöglicht es, sich selbst zu verpflegen. Darüber hinaus gehört zu diesem Apartment eine gemütliche Terrasse. Kostenloses WLAN mit Glasfaser sorgt für schnelle und zuverlässige Internetverbindungen.",
 		capacity: "1 Person",
-		price: "ab 140,– €",
+		price: "ab 85,– €",
 		size: "30 m²",
 		services: [
-			"Wahlweise Frühstücksbuffet buchbar",
 			"Kostenfreies WLAN mit Glasfaseranschluss",
 			"Tägliche Reinigung",
 			"Kostenloser Parkplatz",
-			"Wäscheservice auf Anfrage",
+			"Entspannen im Garten",
+			"Grillbereich im Garten",
 		],
 		features: [
 			"Separates Schlafzimmer",
@@ -375,13 +376,13 @@ const apartments = {
 			"Flat-TV",
 			"Modernes Badezimmer mit Dusche und WC",
 			"Haartrockner",
-			"Hochwertige Pflegeprodukte",
+			" Pflegeprodukte",
 			"Klimaanlage",
 		],
 	},
 	doppelzimmer: {
-		name: "Apartment Doppelzimmer",
-		category: "Apartment",
+		name: "Apartment für zwei Person",
+		category: "",
 		tagline: "Großzügiger Wohnraum mit separatem Schlafzimmer",
 		images: [
 			new URL(
@@ -428,14 +429,14 @@ const apartments = {
 		description:
 			"Das Apartment Doppelzimmer bietet für zwei Personen eine komfortable Unterkunft auf 36 m². Es verfügt über ein separates Schlafzimmer mit einem luxuriösen Boxspringbett (180 x 200 cm), das Privatsphäre und Ruhe gewährleistet. Das moderne Badezimmer ist gut ausgestattet. Der Wohnbereich lädt mit einem Flat-TV zum Entspannen ein und geht nahtlos in den Essbereich über, der ausreichend Platz für gemütliche Mahlzeiten bietet. Eine voll ausgestattete Küchenzeile ermöglicht es den Gästen, sich selbst zu verpflegen. Darüber hinaus gehört zu jedem Apartment eine Terrasse, die zum Verweilen im Freien einlädt. Kostenloses WLAN mit Glasfaser sorgt für schnelle und zuverlässige Internetverbindungen.",
 		capacity: "2 Personen",
-		price: "ab 160,– €",
+		price: "ab 115,– €",
 		size: "36 m²",
 		services: [
-			"Wahlweise Frühstücksbuffet buchbar",
 			"Kostenfreies WLAN mit Glasfaseranschluss",
 			"Tägliche Reinigung",
 			"Kostenloser Parkplatz",
-			"Wäscheservice auf Anfrage",
+			"Entspannen im Garten",
+			"Grillbereich im Garten",
 		],
 		features: [
 			"Separates Schlafzimmer",
@@ -447,7 +448,7 @@ const apartments = {
 			"Flat-TV",
 			"Modernes Badezimmer mit Dusche und WC",
 			"Haartrockner",
-			"Hochwertige Pflegeprodukte",
+			"Pflegeprodukte",
 			"Klimaanlage",
 		],
 	},

@@ -16,14 +16,15 @@ import uberUnsImage from "@/assets/images/Hotel Burgholz_Uschi Kitschke Fotograf
 import hostsImage from "@/assets/images/doppelzimmer2.jpg";
 // Content for the "About Hotel" section
 const aboutContent = ref({
-	subtitle: "Über uns",
+	subtitle: "",
 	title: "DAS HOTEL BURGHOLZ",
 	paragraphs: [
 		"Das Hotel Burgholz, ein im Winter 2013 fertiggestellter Neubau, bietet Ihnen eine ruhige Lage am Rande des Burgauer Waldes, dem Burgholz. Mit seiner modernen Architektur, hochwertigen Ausstattung und großzügigen Räumlichkeiten sorgt unser Hotel-Team dafür, dass Ihr Aufenthalt bei uns komfortabel und unvergesslich wird.",
 		"Unser Hotel verfügt über ausreichend hoteleigene Parkplätze sowie eine Garage für Fahrräder und Motorräder, sodass Sie sich keine Gedanken um die Unterbringung Ihres Fahrzeugs machen müssen.",
 	],
+	aboveImageContent: "UNSER CHECK-IN SYSTEM:",
 	belowImageContent: [
-		"Für Ihren Komfort bieten wir ein 24/7 Check-in-System, das sich direkt am Nachteingang befindet und Ihnen eine flexible An- und Abreise ermöglicht.",
+		"Für Ihren Komfort bieten wir ein 24/7 Check-in-System, dass sich direkt am Nachteingang befindet und Ihnen eine flexible An- und Abreise ermöglicht.",
 	],
 	// buttons: [
 	// 	{ text: "ZIMMER", url: "#", type: "dark" },
@@ -37,8 +38,8 @@ const aboutContent = ref({
 
 // Content for the "Hosts" section
 const hostsContent = ref({
-	subtitle: "Unsere Zimmerkategorien",
-	title: "IHRE GASTGEBER",
+	subtitle: "",
+	title: "UNSERE ZIMMERKATEGORIEN",
 	paragraphs: [
 		"Wir bieten Ihnen eine Vielzahl an Unterkünften, die Ihren individuellen Bedürfnissen gerecht werden:",
 		"– moderne Einzel- und Doppelzimmer: Perfekt für Geschäftsreisende oder Paare.",
@@ -47,7 +48,7 @@ const hostsContent = ref({
 	],
 	buttons: [
 		{ text: "ZIMMER", url: "/zimmer", type: "dark" },
-		{ text: "KONTAKT", url: "/kontakt", type: "light" },
+		// { text: "KONTAKT", url: "/kontakt", type: "light" },
 	],
 	image: {
 		src: hostsImage,

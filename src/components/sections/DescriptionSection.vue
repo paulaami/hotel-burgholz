@@ -2,8 +2,8 @@
 	<section class="hotel-description" ref="sectionRef">
 		<ContentContainer>
 			<div class="description-content" :class="{ 'image-first': imageFirst }">
-				<div class="description-text" :class="{ 'animate': isVisible }">
-					<p class="subtitle">{{ content.subtitle }}</p>
+				<div class="description-text" :class="{ animate: isVisible }">
+					<p v-if="content.subtitle" class="subtitle">{{ content.subtitle }}</p>
 					<h2 class="title">{{ content.title }}</h2>
 					<div class="description">
 						<p v-for="(paragraph, index) in content.paragraphs" :key="index">
@@ -19,16 +19,26 @@
 							:url="button.url"
 						/>
 					</div>
+					<h2 v-if="content.aboveImageContent" class="description-bottom title">
+						{{ content.aboveImageContent }}
+					</h2>
 				</div>
-				<div class="description-image" :class="{ 'animate': isVisible }">
+				<div class="description-image" :class="{ animate: isVisible }">
 					<img :src="content.image.src" :alt="content.image.alt" />
 				</div>
 			</div>
 
 			<!-- Content below image -->
-			<div v-if="content.belowImageContent" class="below-image-content" :class="{ 'animate': isVisible }">
+			<div
+				v-if="content.belowImageContent"
+				class="below-image-content"
+				:class="{ animate: isVisible }"
+			>
 				<div class="below-image-text">
-					<p v-for="(paragraph, index) in content.belowImageContent" :key="index">
+					<p
+						v-for="(paragraph, index) in content.belowImageContent"
+						:key="index"
+					>
 						{{ paragraph }}
 					</p>
 				</div>
@@ -45,12 +55,12 @@ import ContentContainer from "@/components/layout/ContentContainer.vue";
 defineProps({
 	content: {
 		type: Object,
-		required: true
+		required: true,
 	},
 	imageFirst: {
 		type: Boolean,
-		default: false
-	}
+		default: false,
+	},
 });
 
 const sectionRef = ref(null);
@@ -59,15 +69,16 @@ const isVisible = ref(false);
 // Function to check if the element is in viewport
 const checkVisibility = () => {
 	if (!sectionRef.value) return;
-	
+
 	const rect = sectionRef.value.getBoundingClientRect();
-	const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-	
+	const windowHeight =
+		window.innerHeight || document.documentElement.clientHeight;
+
 	// Element is considered visible when its top is in the bottom 80% of the viewport
 	if (rect.top <= windowHeight * 0.8) {
 		isVisible.value = true;
 		// Remove scroll listener once animation has triggered
-		window.removeEventListener('scroll', checkVisibility);
+		window.removeEventListener("scroll", checkVisibility);
 	}
 };
 
@@ -75,12 +86,12 @@ onMounted(() => {
 	// Check visibility on mount (in case section is already in view)
 	checkVisibility();
 	// Add scroll listener
-	window.addEventListener('scroll', checkVisibility);
+	window.addEventListener("scroll", checkVisibility);
 });
 
 onUnmounted(() => {
 	// Clean up scroll listener
-	window.removeEventListener('scroll', checkVisibility);
+	window.removeEventListener("scroll", checkVisibility);
 });
 </script>
 
@@ -98,7 +109,7 @@ onUnmounted(() => {
 	flex-direction: column !important;
 	align-items: center;
 	gap: $spacing-xxl;
-	
+
 	&.image-first {
 		flex-direction: row-reverse;
 	}
@@ -110,16 +121,16 @@ onUnmounted(() => {
 	opacity: 0;
 	transform: translateX(-50px);
 	transition: opacity 0.8s ease, transform 0.8s ease;
-	
+
 	&.animate {
 		opacity: 1;
 		transform: translateX(0);
 	}
-	
+
 	// When image is first, text should slide from right
 	.image-first & {
 		transform: translateX(50px);
-		
+
 		&.animate {
 			transform: translateX(0);
 		}
@@ -177,17 +188,17 @@ onUnmounted(() => {
 	transform: translateX(50px);
 	transition: opacity 0.8s ease, transform 0.8s ease;
 	transition-delay: 0.2s; // Slight delay for staggered effect
-	max-width: 800px;
+	max-width: 1200px;
 
 	&.animate {
 		opacity: 1;
 		transform: translateX(0);
 	}
-	
+
 	// When image is first, image should slide from left
 	.image-first & {
 		transform: translateX(-50px);
-		
+
 		&.animate {
 			transform: translateX(0);
 		}
@@ -209,7 +220,7 @@ onUnmounted(() => {
 	transform: translateY(30px);
 	transition: opacity 0.8s ease, transform 0.8s ease;
 	transition-delay: 0.4s; // Delayed after image animation
-	
+
 	&.animate {
 		opacity: 1;
 		transform: translateY(0);
@@ -222,7 +233,7 @@ onUnmounted(() => {
 	text-align: center;
 	max-width: 800px;
 	margin: 0 auto;
-	
+
 	p {
 		margin-bottom: $spacing-lg;
 
@@ -232,12 +243,11 @@ onUnmounted(() => {
 	}
 }
 
-
 @include responsive(lg) {
 	.description-content {
 		flex-direction: column-reverse !important; /* Force column-reverse for both layouts */
 		gap: $spacing-xxl;
-		
+
 		/* Ensure order is respected for image-first layout at smaller screens */
 		&.image-first {
 			.description-text {
@@ -254,28 +264,30 @@ onUnmounted(() => {
 		flex: 1;
 		width: 100%;
 	}
-	
+
 	// Reset the animation directions for mobile layout
 	.description-text {
 		transform: translateY(30px);
-		
+
 		.image-first & {
 			transform: translateY(30px);
 		}
-		
-		&.animate, .image-first &.animate {
+
+		&.animate,
+		.image-first &.animate {
 			transform: translateY(0);
 		}
 	}
-	
+
 	.description-image {
 		transform: translateY(30px);
-		
+
 		.image-first & {
 			transform: translateY(30px);
 		}
-		
-		&.animate, .image-first &.animate {
+
+		&.animate,
+		.image-first &.animate {
 			transform: translateY(0);
 		}
 	}
@@ -322,5 +334,9 @@ onUnmounted(() => {
 			font-size: 22px;
 		}
 	}
+}
+
+.description-bottom.title {
+	margin-bottom: 0;
 }
 </style>

@@ -30,6 +30,23 @@
 								Möglichkeiten, ihre Leidenschaft für das Mountainbiken
 								auszuleben.
 							</p>
+							<p>
+								Egal, ob du ein erfahrener Mountainbiker bist oder gerade erst
+								anfängst, die Nordeifel hat für jeden etwas zu bieten. Die
+								Region zeichnet sich durch ein gut ausgebautes Netz an Trails
+								aus, die sowohl technisch anspruchsvolle Abschnitte als auch
+								entspannende Fahrten durch malerische Wälder und Wiesen
+								umfassen. Die Routen variieren in Länge und Schwierigkeitsgrad,
+								sodass du sowohl kurze Ausflüge als auch mehrstündige Touren
+								planen kannst.
+							</p>
+
+							<p>
+								Für diejenigen, die die Region intensiv und sicher erkunden
+								möchten, stehen erfahrene Guides für Mountainbike, Gravelbike
+								und Rennrad zur Verfügung. Diese Guides kennen die besten Routen
+								und versteckten Schätze der Nord- Eifel.
+							</p>
 						</div>
 						<div class="action-buttons">
 							<a href="#" class="action-button dark">ANFRAGEN</a>
@@ -47,7 +64,7 @@
 		</section>
 
 		<!-- Additional description -->
-		<section class="additional-description-section">
+		<!-- <section class="additional-description-section">
 			<ContentContainer>
 				<div class="additional-description">
 					<p>
@@ -68,21 +85,21 @@
 					</p>
 				</div>
 			</ContentContainer>
-		</section>
+		</section> -->
 
 		<!-- Carousel section -->
 		<section class="bike-carousel-section">
 			<ContentContainer>
 				<div class="carousel-container">
-					<img 
-						:src="bikeImages[currentImageIndex].src" 
-						:alt="bikeImages[currentImageIndex].alt" 
+					<img
+						:src="bikeImages[currentImageIndex].src"
+						:alt="bikeImages[currentImageIndex].alt"
 						class="carousel-image"
 					/>
-					
+
 					<!-- Navigation arrows -->
-					<button 
-						class="carousel-arrow carousel-arrow-left" 
+					<button
+						class="carousel-arrow carousel-arrow-left"
 						@click="prevImage"
 						aria-label="Previous image"
 					>
@@ -100,8 +117,8 @@
 							<polyline points="15 18 9 12 15 6"></polyline>
 						</svg>
 					</button>
-					<button 
-						class="carousel-arrow carousel-arrow-right" 
+					<button
+						class="carousel-arrow carousel-arrow-right"
 						@click="nextImage"
 						aria-label="Next image"
 					>
@@ -120,13 +137,15 @@
 						</svg>
 					</button>
 				</div>
-				
+
 				<!-- Carousel indicators -->
 				<div class="carousel-indicators">
-					<div v-for="(_, index) in bikeImages" :key="index" 
-						 :class="['indicator-item', { active: index === currentImageIndex }]"
-						 @click="goToImage(index)">
-					</div>
+					<div
+						v-for="(_, index) in bikeImages"
+						:key="index"
+						:class="['indicator-item', { active: index === currentImageIndex }]"
+						@click="goToImage(index)"
+					></div>
 				</div>
 			</ContentContainer>
 		</section>
@@ -135,7 +154,7 @@
 		<div class="room-details-expanded" v-if="isDetailsActive">
 			<ContentContainer>
 				<div class="details-header">
-					<h3>Details & Ausstattung: Bike Tours</h3>
+					<h3>Details: Bike Tours</h3>
 					<button class="close-details" @click="closeDetails">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -181,9 +200,7 @@
 							<li>Bike-Waschplatz am Hotel</li>
 							<li>Sichere Bike-Garage</li>
 							<li>Werkzeug für kleinere Reparaturen</li>
-							<li>Lunchpakete für Tagestouren</li>
 							<li>GPS-Tracks aller Touren</li>
-							<li>Bike-Verleih auf Anfrage</li>
 						</ul>
 					</div>
 				</div>
@@ -233,7 +250,8 @@ const nextImage = () => {
 };
 
 const prevImage = () => {
-	currentImageIndex.value = (currentImageIndex.value - 1 + totalImages.value) % totalImages.value;
+	currentImageIndex.value =
+		(currentImageIndex.value - 1 + totalImages.value) % totalImages.value;
 };
 
 const goToImage = (index: number) => {

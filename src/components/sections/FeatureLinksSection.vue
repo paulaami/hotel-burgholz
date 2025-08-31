@@ -23,27 +23,25 @@ import zimmer from "@/assets/images/einzelzimmer/Hotel Burgholz_Uschi Kitschke F
 import bike from "@/assets/images/bike.jpg";
 import restaurant from "@/assets/images/restaurant.jpg";
 
-
 // This could be loaded from an API or CMS
 const features = ref([
 	{
 		title: "ZIMMER",
-		subtitle: "Wohlfühlen",
+		subtitle: "",
 		image: zimmer,
-		url: "#zimmer",
+		url: "/zimmer",
 	},
 	{
 		title: "UMGEBUNG",
-		subtitle: "unsere Fahrradtouren",
+		subtitle: "",
 		image: bike,
-		url: "#umgebung",
+		url: "/bike-tours",
 	},
 	{
 		title: "FRUHSTUCK",
-		subtitle: "Genießen",
-		image:
-    restaurant,
-		url: "#restaurant",
+		subtitle: "",
+		image: restaurant,
+		url: "/zimmer",
 	},
 ]);
 </script>

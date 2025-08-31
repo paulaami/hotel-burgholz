@@ -5,7 +5,7 @@
 			<div class="hero-content">
 				<ContentContainer>
 					<h1 class="hero-title">APARTMENTS</h1>
-					<p class="hero-subtitle">Großzügiger Wohnkomfort im Schwarzwald</p>
+					<p class="hero-subtitle">Großzügiger Wohnkomfort in der Nordeifel</p>
 				</ContentContainer>
 			</div>
 		</section>
@@ -48,13 +48,13 @@
 									:to="'/zimmer/apartment/' + key"
 									class="read-more-button"
 								>
-									read more
+									Zimmerdetails
 								</router-link>
 								<router-link
 									:to="'/buchen/apartment/' + key"
 									class="booking-button"
 								>
-									Book
+									Buchen
 								</router-link>
 							</div>
 						</div>
@@ -79,8 +79,8 @@ const truncatedDescription = (text) => {
 // Apartment data
 const apartments = {
 	einzelzimmer: {
-		name: "Apartment Einzelzimmer",
-		category: "Apartment",
+		name: "Apartment für eine Person",
+		category: "",
 		images: [
 			new URL(
 				"@/assets/images/apartament/einzelzimmer/Hotel Burgholz_Uschi Kitschke Fotografie-100.jpg",
@@ -90,12 +90,12 @@ const apartments = {
 		description:
 			"Komfortables Apartment mit separatem Schlafzimmer für eine Person. Ausgestattet mit Küchenzeile, Wohnbereich und eigener Terrasse für maximalen Komfort und Privatsphäre.",
 		capacity: "1 Person",
-		price: "Ab 140,– €",
+		price: "Ab 85,– €",
 		size: "30 m²",
 	},
 	doppelzimmer: {
-		name: "Apartment Doppelzimmer",
-		category: "Apartment",
+		name: "Apartment für zwei Person",
+		category: "",
 		images: [
 			new URL(
 				"@/assets/images/apartament/doppelzimmer/Hotel Burgholz_Uschi Kitschke Fotografie-88.jpg",
@@ -106,7 +106,7 @@ const apartments = {
 		description:
 			"Geräumiges Apartment mit separatem Schlafzimmer für zwei Personen. Mit luxuriösem Boxspringbett, Küchenzeile, Wohnbereich und eigener Terrasse für einen komfortablen Aufenthalt.",
 		capacity: "2 Personen",
-		price: "Ab 160,– €",
+		price: "Ab 115,– €",
 		size: "36 m²",
 	},
 };

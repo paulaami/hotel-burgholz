@@ -21,13 +21,7 @@
 						<p class="subtitle">Ihr Ort für Meetings und Veranstaltungen</p>
 						<h2 class="title">TAGUNGSRAUM</h2>
 						<div class="description">
-							<p>
-								Willkommen im modernen Tagungsraum – einem idealen Ort für Ihre
-								Meetings, Seminare und Workshops. Dieser Raum bietet nicht nur
-								ausreichend Platz für kreative Ideen und produktive
-								Diskussionen, sondern auch eine inspirierende Atmosphäre, die
-								Ihre Veranstaltung unvergesslich macht.
-							</p>
+							<p></p>
 						</div>
 						<div class="action-buttons">
 							<a href="#" class="action-button dark">ANFRAGEN</a>
@@ -51,6 +45,13 @@
 		<section class="additional-description-section">
 			<ContentContainer>
 				<div class="additional-description">
+					<p>
+						Willkommen im modernen Tagungsraum – einem idealen Ort für Ihre
+						Meetings, Seminare und Workshops. Dieser Raum bietet nicht nur
+						ausreichend Platz für kreative Ideen und produktive Diskussionen,
+						sondern auch eine inspirierende Atmosphäre, die Ihre Veranstaltung
+						unvergesslich macht.
+					</p>
 					<p>
 						Für entspannende Pausen steht ein angrenzender Aufenthaltsraum zur
 						Verfügung. Hier finden Sie eine Kaffeemaschine, die für aromatische
