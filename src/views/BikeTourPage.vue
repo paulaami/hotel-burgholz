@@ -52,7 +52,7 @@
 							<a href="#" class="action-button dark">ANFRAGEN</a>
 							<button class="details-button" @click="toggleDetails">
 								<span class="details-icon">i</span>
-								DETAILS & AUSSTATTUNG
+								DETAILS
 							</button>
 						</div>
 					</div>
@@ -332,10 +332,10 @@ const closeDetails = () => {
 	grid-template-columns: 1fr;
 	gap: $spacing-xxl;
 
-	@include responsive(min-lg) {
-		grid-template-columns: 3fr 2fr;
-		align-items: center;
-	}
+	// @include responsive(min-lg) {
+	// 	grid-template-columns: 3fr 2fr;
+	// 	align-items: center;
+	// }
 }
 
 .description-text {
@@ -454,11 +454,12 @@ const closeDetails = () => {
 
 .description-image {
 	img {
-		width: 100%;
-		height: auto;
-		border-radius: 4px;
-		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-		object-fit: cover;
+		display: none;
+		// width: 100%;
+		// height: auto;
+		// border-radius: 4px;
+		// box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+		// object-fit: cover;
 	}
 }
 
@@ -482,7 +483,7 @@ const closeDetails = () => {
 
 // Carousel section (similar to room page)
 .bike-carousel-section {
-	padding: $spacing-md 0;
+	padding: 40px 0;
 	background-color: $color-background-light;
 
 	.carousel-container {

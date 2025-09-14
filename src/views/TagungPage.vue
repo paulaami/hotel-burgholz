@@ -21,7 +21,45 @@
 						<p class="subtitle">Ihr Ort für Meetings und Veranstaltungen</p>
 						<h2 class="title">TAGUNGSRAUM</h2>
 						<div class="description">
-							<p></p>
+							<p>
+								Willkommen im modernen Tagungsraum – einem idealen Ort für Ihre
+								Meetings, Seminare und Workshops. Dieser Raum bietet nicht nur
+								ausreichend Platz für kreative Ideen und produktive
+								Diskussionen, sondern auch eine inspirierende Atmosphäre, die
+								Ihre Veranstaltung unvergesslich macht.
+							</p>
+							<p>
+								Für entspannende Pausen steht ein angrenzender Aufenthaltsraum
+								zur Verfügung. Hier finden Sie eine Kaffeemaschine, die für
+								aromatische Kaffeepausen sorgt, sowie einen Kühlschrank, der mit
+								einer Auswahl an Softgetränken gefüllt ist. So bleiben alle
+								Teilnehmer jederzeit erfrischt und motiviert.
+							</p>
+
+							<p>
+								Für eine optimale Präsentationstechnik ist der Tagungsraum mit
+								einem hochmodernen Beamer ausgestattet, der eine
+								ClickShare-Anbindung für Ihren Computer ermöglicht. Das
+								bedeutet, dass Sie Ihre Präsentationen und Inhalte ganz einfach
+								und kabellos teilen können – für einen reibungslosen Ablauf
+								Ihrer Veranstaltung. Die integrierten Lautsprecher sorgen dafür,
+								dass alle Teilnehmer auch die akustischen Inhalte klar und
+								deutlich hören können.
+							</p>
+
+							<p>
+								Darüber hinaus ist der Raum klimatisiert, sodass Sie und Ihre
+								Gäste bei jeder Raumtemperatur komfortabel arbeiten können. Für
+								zusätzliche Bequemlichkeit steht ein WC im Tagungsbereich zur
+								Verfügung.
+							</p>
+
+							<p>
+								Egal, ob Sie eine kleine Besprechung oder ein größeres Seminar
+								planen, der Tagungsraum im Hotel Burgholz bietet Ihnen die
+								perfekte Kombination aus Funktionalität und Komfort. Wir freuen
+								uns darauf, Ihre Veranstaltung zu einem vollen Erfolg zu machen!
+							</p>
 						</div>
 						<div class="action-buttons">
 							<a href="#" class="action-button dark">ANFRAGEN</a>
@@ -45,7 +83,7 @@
 		<section class="additional-description-section">
 			<ContentContainer>
 				<div class="additional-description">
-					<p>
+					<!-- <p>
 						Willkommen im modernen Tagungsraum – einem idealen Ort für Ihre
 						Meetings, Seminare und Workshops. Dieser Raum bietet nicht nur
 						ausreichend Platz für kreative Ideen und produktive Diskussionen,
@@ -82,7 +120,7 @@
 						planen, der Tagungsraum im Hotel Burgholz bietet Ihnen die perfekte
 						Kombination aus Funktionalität und Komfort. Wir freuen uns darauf,
 						Ihre Veranstaltung zu einem vollen Erfolg zu machen!
-					</p>
+					</p> -->
 				</div>
 			</ContentContainer>
 		</section>
@@ -334,10 +372,10 @@ const closeDetails = () => {
 	grid-template-columns: 1fr;
 	gap: $spacing-xxl;
 
-	@include responsive(min-lg) {
-		grid-template-columns: 3fr 2fr;
-		align-items: center;
-	}
+	// @include responsive(min-lg) {
+	// 	grid-template-columns: 3fr 2fr;
+	// 	align-items: center;
+	// }
 }
 
 .description-text {
@@ -456,17 +494,18 @@ const closeDetails = () => {
 
 .description-image {
 	img {
-		width: 100%;
-		height: auto;
-		border-radius: 4px;
-		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-		object-fit: cover;
+		display: none;
+		// width: 100%;
+		// height: auto;
+		// border-radius: 4px;
+		// box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+		// object-fit: cover;
 	}
 }
 
 // Additional description section
 .additional-description-section {
-	padding: $spacing-section 0;
+	// padding: 40px 0;
 	background-color: $color-background-light;
 
 	.additional-description {
@@ -484,7 +523,7 @@ const closeDetails = () => {
 
 // Carousel section (similar to room page)
 .conference-carousel-section {
-	padding: $spacing-md 0;
+	padding: 40px 0;
 	background-color: $color-background-light;
 
 	.carousel-container {

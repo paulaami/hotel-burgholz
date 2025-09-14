@@ -1,23 +1,22 @@
 <template>
 	<footer class="footer">
 		<div class="container">
+			<h3 class="footer-heading">KONTAKT</h3>
 			<div class="footer-wrapper">
 				<div class="footer-section">
-					<h3 class="footer-heading">KONTAKT</h3>
 					<div class="address">
 						<p>Hotel Burgholz</p>
 						<p>Am Burgholz 27</p>
 						<p>52372 Kreuzau - Stockheim</p>
 						<p>Deutschland</p>
 					</div>
-					<div class="contact-info">
-						<p>Tel. +49(0)24215589200</p>
-						<p>Tel. +49(0)176 23896507</p>
-						<p>kontakt@hotel-burgholz.de</p>
-						<p>reservierung@hotel-burgholz.de</p>
-					</div>
 					<div class="social-icons">
-						<a href="#" class="social-icon" aria-label="Facebook">
+						<a
+							href="https://facebook.com/HotelBurgholz"
+							class="social-icon"
+							aria-label="Facebook"
+							target="_blank"
+						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								viewBox="0 0 24 24"
@@ -34,7 +33,12 @@
 								/>
 							</svg>
 						</a>
-						<a href="#" class="social-icon" aria-label="Instagram">
+						<a
+							href="https://instagram.com/hotel_burgholz"
+							class="social-icon"
+							aria-label="Instagram"
+							target="_blank"
+						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								viewBox="0 0 24 24"
@@ -73,10 +77,18 @@
 							</svg>
 						</a>
 					</div>
+					<!-- <div></div> -->
 				</div>
 				<div class="footer-section">
-					<h3 class="footer-heading">MENU</h3>
-					<nav class="footer-links">
+					<div class="contact-info">
+						<p>Tel. +49(0)24215589200</p>
+						<p>Tel. +49(0)176 23896507</p>
+						<p>kontakt@hotel-burgholz.de</p>
+						<p>reservierung@hotel-burgholz.de</p>
+					</div>
+
+					<!-- <h3 class="footer-heading">MENU</h3> -->
+					<!-- <nav class="footer-links">
 						<a href="#" class="footer-link">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -128,7 +140,7 @@
 							</svg>
 							KONTAKT & LAGE
 						</a>
-					</nav>
+					</nav> -->
 				</div>
 			</div>
 		</div>
@@ -151,27 +163,27 @@
 		<div class="footer-bottom">
 			<div class="container">
 				<div class="legal-links">
-					<a
-						href="/hotel-burgholz/documents/dsg-hotel-burgholz-2025-verarbeitungsverzeichnis-de-21072025-1235.pdf"
+					<router-link
+						to="/datenschutz"
 						class="legal-link"
 						target="_blank"
 						rel="noopener noreferrer"
-						>Datenschutz</a
+						>Datenschutz</router-link
 					>
-					<a
-						href="/hotel-burgholz/documents/dsg-hotel-burgholz-2025-impressum-de-21072025-1322.pdf"
+					<router-link
+						to="/impressum"
 						class="legal-link"
 						target="_blank"
 						rel="noopener noreferrer"
-						>Impressum</a
+						>Impressum</router-link
 					>
-					<a
+					<!-- <a
 						href="/hotel-burgholz/documents/dsg-hotel-burgholz-2025-dse-de-21072025-1250.pdf"
 						class="legal-link"
 						target="_blank"
 						rel="noopener noreferrer"
 						>Datenschutzeinstellungen</a
-					>
+					> -->
 				</div>
 			</div>
 		</div>

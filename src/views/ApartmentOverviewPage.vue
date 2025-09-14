@@ -94,7 +94,7 @@ const apartments = {
 		size: "30 m²",
 	},
 	doppelzimmer: {
-		name: "Apartment für zwei Person",
+		name: "Apartment für zwei Personen",
 		category: "",
 		images: [
 			new URL(

@@ -7,6 +7,8 @@ import TagungPage from "@/views/TagungPage.vue";
 import BikeTourPage from "@/views/BikeTourPage.vue";
 import KontaktPage from "@/views/KontaktPage.vue";
 import EnergyStar from "@/views/EnergyStar.vue";
+import DatenSchutz from "@/views/DatenSchutz.vue";
+import Impressum from "@/views/Impressum.vue";
 
 const routes = [
 	{
@@ -77,6 +79,16 @@ const routes = [
 		meta: {
 			activeMenu: "kontakt",
 		},
+	},
+	{
+		path: "/datenschutz",
+		name: "datenschutz",
+		component: DatenSchutz,
+	},
+	{
+		path: "/impressum",
+		name: "impressum",
+		component: Impressum,
 	},
 ];
 

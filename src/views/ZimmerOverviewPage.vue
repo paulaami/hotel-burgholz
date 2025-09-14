@@ -116,11 +116,11 @@ const rooms = {
 		name: "Studio Apartment",
 		category: "",
 		images: [
+			new URL("@/assets/images/studio5.jpg", import.meta.url).href,
 			new URL("@/assets/images/studio2.jpg", import.meta.url).href,
 			new URL("@/assets/images/studio.jpg", import.meta.url).href,
 			new URL("@/assets/images/studio3.jpg", import.meta.url).href,
 			new URL("@/assets/images/studio4.jpg", import.meta.url).href,
-			new URL("@/assets/images/studio5.jpg", import.meta.url).href,
 		],
 		description:
 			"Das Studio Apartment bietet auf einer großzügigen Fläche von circa 64 m² luxuriösen Komfort und moderne Annehmlichkeiten. Mit zwei gemütlichen Schlafzimmern für entspannende Nachtruhe.",

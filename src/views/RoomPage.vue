@@ -377,11 +377,10 @@ const apartments = {
 			"Modernes Badezimmer mit Dusche und WC",
 			"Haartrockner",
 			" Pflegeprodukte",
-			"Klimaanlage",
 		],
 	},
 	doppelzimmer: {
-		name: "Apartment für zwei Person",
+		name: "Apartment für zwei Personen",
 		category: "",
 		tagline: "Großzügiger Wohnraum mit separatem Schlafzimmer",
 		images: [
@@ -449,7 +448,6 @@ const apartments = {
 			"Modernes Badezimmer mit Dusche und WC",
 			"Haartrockner",
 			"Pflegeprodukte",
-			"Klimaanlage",
 		],
 	},
 };

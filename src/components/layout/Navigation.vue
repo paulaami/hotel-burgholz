@@ -20,7 +20,11 @@
 
 				<!-- Icons in the menu -->
 				<div class="menu__icons detect-nav">
-					<a href="https://www.instagram.com" target="_blank" class="menu-icon">
+					<a
+						href="https://instagram.com/hotel_burgholz"
+						target="_blank"
+						class="menu-icon"
+					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 24 24"
@@ -37,7 +41,11 @@
 							<line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
 						</svg>
 					</a>
-					<a href="https://www.facebook.com" target="_blank" class="menu-icon">
+					<a
+						href="https://facebook.com/HotelBurgholz"
+						target="_blank"
+						class="menu-icon"
+					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 24 24"
@@ -55,7 +63,7 @@
 						</svg>
 					</a>
 					<a
-						href="https://wa.me/yourphonenumber"
+						href="https://wa.me/4917623896507"
 						target="_blank"
 						class="menu-icon"
 					>

@@ -1,0 +1,37 @@
+<h1>Impressum</h1>
+<h2 id="m46">Diensteanbieter</h2>
+<p>Hotel Burgholz</p>
+<p>Daniel Rabenda</p>
+<p>Am Burgholz 27</p>
+<p>52372 Kreuzau-Stockheim</p>
+
+<h2 id="m56">Kontaktm&ouml;glichkeiten</h2><p>E-Mail-Adresse: kontakt@hotel-burgholz.de</p>
+<p>Telefon: +49(0)2421/55890200</p>
+<p>Fax: +49(0)2421/5589210</p>
+<p>Kontaktformular: kontakt@hotel-burgholz.de</p>
+<p>Weitere Kontaktm&ouml;glichkeiten: +4917623896507</p>
+
+<h2 id="m153">Vertretungsberechtigte Personen</h2><p>Vertretungsberechtigt: Inhaber Daniel Rabenda</p>
+
+<h2 id="m154">Journalistisch-redaktionelle Angebote</h2><p>Inhaltlich verantwortlich: Adresse wie oben</p>
+
+<h2 id="m3589">Audiovisuelle Mediendienste</h2><p>Sitzland: Deutschland.</p>
+
+<h2 id="m58">Angaben zum Unternehmen</h2><p>Umsatzsteuer Identifikationsnummer (USt-ID): DE353725220</p>
+<p>Gesch&auml;ftsbereich: Hotel</p>
+
+<h2 id="m72">Berufshaftpflichtversicherung</h2><p>AXA Versicherung AG<br>Colonia-Allee 10-20<br>51067 K&ouml;ln</p>
+<p>R&auml;umliche Geltung: Deutschland</p>
+
+<h2 id="m174">Verbraucherstreitbeilegung</h2><p>Wir sind nicht bereit und nicht verpflichtet an einem Streitbeilegungsverfahren vor einer Verbraucherstreitschlichtungsstelle teilzunehmen.</p>
+
+<h2 id="m172">Social Media und andere Onlinepr&auml;senzen</h2><p>Dieses Impressum gilt auch f&uuml;r die folgenden Social-Media-Pr&auml;senzen und Onlineprofile: </p>
+<p><a href="https://facebook.com/HotelBurgholz" target="_blank">https://facebook.com/HotelBurgholz</a></p>
+<p><a href="https://instagram.com/hotel_burgholz" target="_blank">https://instagram.com/hotel_burgholz</a></p>
+
+<h2 id="m65">Haftungs- und Schutzrechtshinweise</h2><p>Haftungsausschluss: Die Inhalte dieses Onlineangebotes wurden sorgf&auml;ltig und nach unserem aktuellen Kenntnisstand erstellt, dienen jedoch nur der Information und entfalten keine rechtlich bindende Wirkung, sofern es sich nicht um gesetzlich verpflichtende Informationen (z. B. das Impressum, die Datenschutzerkl&auml;rung, AGB oder verpflichtende Belehrungen von Verbrauchern) handelt. Wir behalten uns vor, die Inhalte vollst&auml;ndig oder teilweise zu &auml;ndern oder zu l&ouml;schen, soweit vertragliche Verpflichtungen unber&uuml;hrt bleiben. Alle Angebote sind freibleibend und unverbindlich.</p>
+<p>Links auf fremde Webseiten: Die Inhalte fremder Webseiten, auf die wir direkt oder indirekt verweisen, liegen au&szlig;erhalb unseres Verantwortungsbereiches und wir machen sie uns nicht zu Eigen. F&uuml;r alle Inhalte und Nachteile, die aus der Nutzung der in den verlinkten Webseiten aufrufbaren Informationen entstehen, &uuml;bernehmen wir keine Verantwortung.</p>
+<p>Urheberrechte und Markenrechte: Alle auf dieser Website dargestellten Inhalte, wie Texte, Fotografien, Grafiken, Marken und Warenzeichen sind durch die jeweiligen Schutzrechte (Urheberrechte, Markenrechte) gesch&uuml;tzt. Die Verwendung, Vervielf&auml;ltigung usw. unterliegen unseren Rechten oder den Rechten der jeweiligen Urheber bzw. Rechteinhaber.</p>
+<p>Hinweise auf Rechtsverst&ouml;&szlig;e: Sollten Sie innerhalb unseres Internetauftritts Rechtsverst&ouml;&szlig;e bemerken, bitten wir Sie uns auf diese hinzuweisen. Wir werden rechtswidrige Inhalte und Links nach Kenntnisnahme unverz&uuml;glich entfernen.</p>
+
+<p class="seal"><a href="https://datenschutz-generator.de/" title="Rechtstext von Dr. Schwenke - f&uuml;r weitere Informationen bitte anklicken." target="_blank" rel="noopener noreferrer nofollow"><img src="https://datenschutz-generator.de/wp-content/plugins/ts-dsg/images/dsg-seal/dsg-seal-doc-de.png" alt="Rechtstext von Dr. Schwenke - f&uuml;r weitere Informationen bitte anklicken." width="250" height="250"></a></p>

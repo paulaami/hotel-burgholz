@@ -32,7 +32,7 @@ const features = ref([
 		url: "/zimmer",
 	},
 	{
-		title: "UMGEBUNG",
+		title: "BIKE TOURS",
 		subtitle: "",
 		image: bike,
 		url: "/bike-tours",
