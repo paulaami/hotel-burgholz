@@ -1,39 +1,9 @@
+Copy
+
 <template>
 	<div class="kontakt-page">
 		<!-- Hero section with background image -->
 		<section class="hero-section fullwidth-section">
-			<!-- Navigation arrows for slider functionality -->
-			<!-- <button class="slider-arrow slider-arrow-left">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					viewBox="0 0 24 24"
-					width="24"
-					height="24"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="2"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-				>
-					<polyline points="15 18 9 12 15 6"></polyline>
-				</svg>
-			</button> -->
-			<!-- <button class="slider-arrow slider-arrow-right">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					viewBox="0 0 24 24"
-					width="24"
-					height="24"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="2"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-				>
-					<polyline points="9 18 15 12 9 6"></polyline>
-				</svg>
-			</button> -->
-
 			<!-- Hero content -->
 			<div class="hero-content">
 				<ContentContainer>
@@ -82,13 +52,31 @@
 				</div>
 
 				<div class="contact-form-container">
+					<!-- Success Message -->
+					<div v-if="showSuccessMessage" class="success-message">
+						<p>
+							✓ Vielen Dank für Ihre Nachricht. Wir werden uns so schnell wie
+							möglich bei Ihnen melden.
+						</p>
+					</div>
+
+					<!-- Error Message -->
+					<div v-if="showErrorMessage" class="error-message">
+						<p>❌ {{ errorMessage }}</p>
+					</div>
+
 					<form class="contact-form" @submit.prevent="submitForm">
 						<h3>Persönliche Daten</h3>
 
 						<div class="form-group">
-							<label for="salutation">Anrede</label>
-							<select id="salutation" v-model="formData.salutation" required>
-								<option value="" disabled selected>Bitte auswählen</option>
+							<label for="salutation">Anrede *</label>
+							<select
+								id="salutation"
+								v-model="formData.salutation"
+								required
+								:disabled="isSubmitting"
+							>
+								<option value="" disabled>Bitte auswählen</option>
 								<option value="Herr">Herr</option>
 								<option value="Frau">Frau</option>
 								<option value="Divers">Divers</option>
@@ -103,6 +91,7 @@
 									id="firstName"
 									v-model="formData.firstName"
 									required
+									:disabled="isSubmitting"
 								/>
 							</div>
 
@@ -113,6 +102,7 @@
 									id="lastName"
 									v-model="formData.lastName"
 									required
+									:disabled="isSubmitting"
 								/>
 							</div>
 						</div>
@@ -125,12 +115,18 @@
 									id="email"
 									v-model="formData.email"
 									required
+									:disabled="isSubmitting"
 								/>
 							</div>
 
 							<div class="form-group">
 								<label for="phone">Telefon</label>
-								<input type="tel" id="phone" v-model="formData.phone" />
+								<input
+									type="tel"
+									id="phone"
+									v-model="formData.phone"
+									:disabled="isSubmitting"
+								/>
 							</div>
 						</div>
 
@@ -140,23 +136,8 @@
 								id="message"
 								v-model="formData.message"
 								rows="5"
+								:disabled="isSubmitting"
 							></textarea>
-						</div>
-
-						<div class="form-group">
-							<label for="antiSpam">Anti-Spam *</label>
-							<input
-								type="text"
-								id="antiSpam"
-								v-model="formData.antiSpam"
-								required
-							/>
-							<div class="captcha">
-								<img
-									src="https://via.placeholder.com/150x50?text=CAPTCHA"
-									alt="Captcha"
-								/>
-							</div>
 						</div>
 
 						<div class="form-group privacy">
@@ -164,13 +145,18 @@
 							<p>
 								Wir verarbeiten Ihre Daten ausschließlich zur Bearbeitung Ihres
 								Anliegens. Weitere Informationen zum Umgang mit
-								personenbezogenen Daten finden Sie <a href="#">hier</a>.
+								personenbezogenen Daten finden Sie
+								<a href="/hotel/datenschutz">hier</a>.
 							</p>
 						</div>
 
 						<div class="form-submit">
-							<button type="submit" class="submit-button">
-								NACHRICHT SENDEN
+							<button
+								type="submit"
+								class="submit-button"
+								:disabled="isSubmitting"
+							>
+								{{ isSubmitting ? "WIRD GESENDET..." : "NACHRICHT SENDEN" }}
 							</button>
 						</div>
 					</form>
@@ -184,11 +170,6 @@
 				<div class="location-social-grid">
 					<div class="location-info">
 						<h3 class="section-title">Unser Standort</h3>
-						<!-- <p>
-							Das Hotel Burgholz liegt eingebettet in die idyllische Landschaft
-							des Mittleren Schwarzwaldes, nur wenige Minuten vom historischen
-							Stadtkern Gengenbachs entfernt.
-						</p> -->
 
 						<div class="hotel-address">
 							<p><strong>Hotel Burgholz</strong></p>
@@ -216,15 +197,6 @@
 		<!-- Google Maps section -->
 		<section class="maps-section">
 			<div class="google-map">
-				<!-- <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2540.1231113946346!2d6.518232415915539!3d50.47714617947849!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bf5c7e6f5c5e3d%3A0x31e43d7fb9d8a3c2!2sHotel%20Burgholz!5e0!3m2!1sen!2spl!4v1634913215698!5m2!1sen!2spl" 
-          width="100%" 
-          height="450" 
-          style="border:0;" 
-          allowfullscreen="" 
-          loading="lazy" 
-          referrerpolicy="no-referrer-when-downgrade">
-        </iframe> -->
 				<iframe
 					src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2523.705187831916!2d6.515752912840198!3d50.762499971535256!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bf69449c1dc9d1%3A0x17d88a71fc414150!2sHotel%20Burgholz!5e0!3m2!1sen!2spl!4v1744478972891!5m2!1sen!2spl"
 					width="100%"
@@ -251,29 +223,68 @@ const formData = ref({
 	email: "",
 	phone: "",
 	message: "",
-	antiSpam: "",
 });
 
+// Form state
+const isSubmitting = ref(false);
+const showSuccessMessage = ref(false);
+const showErrorMessage = ref(false);
+const errorMessage = ref("");
+
 // Form submission
-const submitForm = () => {
-	// Form validation and submission logic would go here
-	console.log("Form submitted:", formData.value);
+const submitForm = async () => {
+	// Reset messages
+	showSuccessMessage.value = false;
+	showErrorMessage.value = false;
+	errorMessage.value = "";
+	isSubmitting.value = true;
 
-	// Reset form after submission
-	formData.value = {
-		salutation: "",
-		firstName: "",
-		lastName: "",
-		email: "",
-		phone: "",
-		message: "",
-		antiSpam: "",
-	};
+	try {
+		// ZMIEŃ NA SWOJĄ LOKALIZACJĘ PHP!
+		// Jeśli PHP jest w tym samym folderze co index.html:
+		const response = await fetch("/send-email.php", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(formData.value),
+		});
 
-	// Show success message or handle response
-	alert(
-		"Vielen Dank für Ihre Nachricht. Wir werden uns so schnell wie möglich bei Ihnen melden."
-	);
+		const result = await response.json();
+
+		if (response.ok && result.success) {
+			// Success!
+			showSuccessMessage.value = true;
+
+			// Reset form
+			formData.value = {
+				salutation: "",
+				firstName: "",
+				lastName: "",
+				email: "",
+				phone: "",
+				message: "",
+			};
+
+			// Hide success message after 5 seconds
+			setTimeout(() => {
+				showSuccessMessage.value = false;
+			}, 5000);
+		} else {
+			// Error from server
+			showErrorMessage.value = true;
+			errorMessage.value =
+				result.message || "Es gab ein Problem beim Senden Ihrer Nachricht.";
+		}
+	} catch (error) {
+		// Network or other error
+		console.error("Form submission error:", error);
+		showErrorMessage.value = true;
+		errorMessage.value =
+			"Es gab ein Problem beim Senden Ihrer Nachricht. Bitte versuchen Sie es später erneut.";
+	} finally {
+		isSubmitting.value = false;
+	}
 };
 </script>
 

@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomePage from "@/views/HomePage.vue";
 import ZimmerOverviewPage from "@/views/ZimmerOverviewPage.vue";
-import ApartmentOverviewPage from "@/views/ApartmentOverviewPage.vue"; // New import
+import ApartmentOverviewPage from "@/views/ApartmentOverviewPage.vue";
 import RoomPage from "@/views/RoomPage.vue";
 import TagungPage from "@/views/TagungPage.vue";
 import BikeTourPage from "@/views/BikeTourPage.vue";
@@ -27,7 +27,7 @@ const routes = [
 	{
 		path: "/zimmer/apartment",
 		name: "apartment-overview",
-		component: ApartmentOverviewPage, // New apartment overview page
+		component: ApartmentOverviewPage,
 		meta: {
 			activeMenu: "room",
 		},
@@ -35,7 +35,7 @@ const routes = [
 	{
 		path: "/zimmer/apartment/:apartmentId",
 		name: "apartment-detail",
-		component: RoomPage, // Same component, will handle apartments
+		component: RoomPage,
 		meta: {
 			activeMenu: "room",
 		},
@@ -93,10 +93,9 @@ const routes = [
 ];
 
 const router = createRouter({
-	history: createWebHistory("/hotel-burgholz/"),
+	history: createWebHistory("/"), // ✅ ZMIENIONE z "/hotel-burgholz/" na "/hotel/"
 	routes,
 	scrollBehavior(to, from, savedPosition) {
-		// Always scroll to top when navigating to a new route
 		if (savedPosition) {
 			return savedPosition;
 		} else {
