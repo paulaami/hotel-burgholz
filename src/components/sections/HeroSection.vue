@@ -62,20 +62,19 @@
 				<p class="hero-subtitle">{{ heroContent.subtitle }}</p>
 			</ContentContainer>
 		</div>
-
 		<!-- Action buttons -->
-<div class="hero-actions">
-	<ContentContainer>
-		<router-link
-			v-for="button in heroContent.buttons"
-			:key="button.text"
-			:to="button.url"
-			class="hero-button"
-		>
-			{{ button.text }}
-		</router-link>
-	</ContentContainer>
-</div>
+		<div class="hero-actions">
+			<ContentContainer>
+				<router-link
+					v-for="button in heroContent.buttons"
+					:key="button.text"
+					:to="button.url"
+					class="hero-button"
+				>
+					{{ button.text }}
+				</router-link>
+			</ContentContainer>
+		</div>
 	</section>
 </template>
 

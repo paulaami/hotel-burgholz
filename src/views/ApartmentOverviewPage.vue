@@ -50,12 +50,13 @@
 								>
 									Zimmerdetails
 								</router-link>
-								<router-link
-									:to="'/buchen/apartment/' + key"
-									class="booking-button"
+								<button
+									class="booking-button d21-result-ibe"
+									@click="openBooking(apartment.oneId)"
+									type="button"
 								>
 									Buchen
-								</router-link>
+								</button>
 							</div>
 						</div>
 					</div>
@@ -76,6 +77,24 @@ const truncatedDescription = (text) => {
 	return text.substring(0, maxLength) + "...";
 };
 
+const openBooking = (oneId: string) => {
+	if (window.dirs21 && typeof window.dirs21.openOne === "function") {
+		window.dirs21.openOne({
+			products: [oneId],
+		});
+	} else {
+		console.error("DIRS21 not loaded yet");
+		// Fallback - spróbuj po chwili
+		setTimeout(() => {
+			if (window.dirs21) {
+				window.dirs21.openOne({
+					products: [oneId],
+				});
+			}
+		}, 500);
+	}
+};
+
 // Apartment data
 const apartments = {
 	einzelzimmer: {
@@ -92,6 +111,7 @@ const apartments = {
 		capacity: "1 Person",
 		price: "Ab 85,– €",
 		size: "30 m²",
+		oneId: "c757a74d-85ef-8269-d694-46f522b348fc",
 	},
 	doppelzimmer: {
 		name: "Apartment für zwei Personen",
@@ -108,6 +128,7 @@ const apartments = {
 		capacity: "2 Personen",
 		price: "Ab 115,– €",
 		size: "36 m²",
+		oneId: "3de0610c-68ea-c562-01e4-51d99df19d69",
 	},
 };
 </script>

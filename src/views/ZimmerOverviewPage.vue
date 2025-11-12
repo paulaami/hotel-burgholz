@@ -43,9 +43,9 @@
 									Zimmerdetails
 								</router-link>
 								<button
-									:to="'/buchen/' + key"
-									class="booking-button d21-trigger-ibe"
-									:data-d21="`{'products': ['${room.oneId}']}`"
+									v-if="key !== 'apartment'"
+									class="booking-button d21-result-ibe"
+									@click="openBooking(room.oneId)"
 									type="button"
 								>
 									Buchen
@@ -68,6 +68,24 @@ const truncatedDescription = (text) => {
 	const maxLength = 150;
 	if (text.length <= maxLength) return text;
 	return text.substring(0, maxLength) + "...";
+};
+
+const openBooking = (oneId: string) => {
+	if (window.dirs21 && typeof window.dirs21.openOne === "function") {
+		window.dirs21.openOne({
+			products: [oneId],
+		});
+	} else {
+		console.error("DIRS21 not loaded yet");
+		// Fallback - spróbuj po chwili
+		setTimeout(() => {
+			if (window.dirs21) {
+				window.dirs21.openOne({
+					products: [oneId],
+				});
+			}
+		}, 500);
+	}
 };
 
 // Room data

@@ -110,9 +110,13 @@
 
 				<!-- Booking button -->
 				<div class="booking-container">
-					<router-link :to="bookingUrl" class="booking-button">
+					<button
+						class="booking-button d21-result-ibe"
+						@click="openBooking(currentRoom.oneId)"
+						type="button"
+					>
 						Buchen
-					</router-link>
+					</button>
 				</div>
 
 				<!-- Room features -->
@@ -158,6 +162,24 @@ const currentImageIndex = ref(0);
 
 // Check if we're on an apartment page
 const isApartmentPage = computed(() => route.path.includes("/apartment/"));
+
+const openBooking = (oneId: string) => {
+	if (window.dirs21 && typeof window.dirs21.openOne === "function") {
+		window.dirs21.openOne({
+			products: [oneId],
+		});
+	} else {
+		console.error("DIRS21 not loaded yet");
+		// Fallback - spróbuj po chwili
+		setTimeout(() => {
+			if (window.dirs21) {
+				window.dirs21.openOne({
+					products: [oneId],
+				});
+			}
+		}, 500);
+	}
+};
 
 // Regular room data
 const rooms = {
@@ -215,6 +237,7 @@ const rooms = {
 			"Pflegeprodukte",
 			"Kofferablage",
 		],
+		oneId: "547bfcb9-e8dc-4f64-a571-07d2d4b8df53",
 	},
 	doppelzimmer: {
 		name: "Doppelzimmer",
@@ -271,6 +294,7 @@ const rooms = {
 			"Pflegeprodukte",
 			"Kofferablage",
 		],
+		oneId: "3de0610c-68ea-c562-01e4-51d99df19d69",
 	},
 	studioApartment: {
 		name: "Studio Apartment",
@@ -307,6 +331,7 @@ const rooms = {
 			"Stilvolles Bad",
 			"Großzügige Dusche",
 		],
+		oneId: "6bb2ab9c-9555-e574-804d-a00e9525fdce",
 	},
 };
 
@@ -378,6 +403,7 @@ const apartments = {
 			"Haartrockner",
 			" Pflegeprodukte",
 		],
+		oneId: "547bfcb9-e8dc-4f64-a571-07d2d4b8df53",
 	},
 	doppelzimmer: {
 		name: "Apartment für zwei Personen",
@@ -449,6 +475,7 @@ const apartments = {
 			"Haartrockner",
 			"Pflegeprodukte",
 		],
+		oneId: "3de0610c-68ea-c562-01e4-51d99df19d69",
 	},
 };
 
