@@ -1,5 +1,3 @@
-Copy
-
 <template>
 	<div class="kontakt-page">
 		<!-- Hero section with background image -->
@@ -197,7 +195,21 @@ Copy
 		<!-- Google Maps section -->
 		<section class="maps-section">
 			<div class="google-map">
+				<div v-if="!mapsConsent" class="cookie-placeholder">
+					<p>
+						Um die Karte anzuzeigen, müssen Sie der Verwendung von Google Maps
+						zustimmen.
+					</p>
+					<button
+						type="button"
+						class="cookie-button"
+						@click="showCookieSettings"
+					>
+						Einstellungen anpassen
+					</button>
+				</div>
 				<iframe
+					v-else
 					src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2523.705187831916!2d6.515752912840198!3d50.762499971535256!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bf69449c1dc9d1%3A0x17d88a71fc414150!2sHotel%20Burgholz!5e0!3m2!1sen!2spl!4v1744478972891!5m2!1sen!2spl"
 					width="100%"
 					height="450"
@@ -212,8 +224,9 @@ Copy
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import ContentContainer from "@/components/layout/ContentContainer.vue";
+import * as CookieConsent from "vanilla-cookieconsent";
 
 // Form data
 const formData = ref({
@@ -231,6 +244,49 @@ const showSuccessMessage = ref(false);
 const showErrorMessage = ref(false);
 const errorMessage = ref("");
 
+// Google Maps consent state
+const mapsConsent = ref(false);
+
+// Check consent status
+const checkConsent = () => {
+	const cookie = CookieConsent.getCookie();
+	mapsConsent.value = cookie?.categories?.includes("functionality") || false;
+};
+
+// Show Cookie Consent settings
+const showCookieSettings = () => {
+	CookieConsent.showPreferences();
+
+	// Poll consent status while modal is open
+	const intervalId = setInterval(() => {
+		checkConsent();
+	}, 300);
+
+	// Stop checking after 10 seconds
+	setTimeout(() => {
+		clearInterval(intervalId);
+	}, 10000);
+};
+
+// Check consent on mount and listen for changes
+onMounted(() => {
+	checkConsent();
+
+	// Listen for ALL consent-related events
+	window.addEventListener("cc:onConsent", () => {
+		setTimeout(checkConsent, 100);
+	});
+	window.addEventListener("cc:onChange", () => {
+		setTimeout(checkConsent, 100);
+	});
+	window.addEventListener("cc:onModalHide", () => {
+		setTimeout(checkConsent, 200);
+	});
+	window.addEventListener("cc:onFirstConsent", () => {
+		setTimeout(checkConsent, 100);
+	});
+});
+
 // Form submission
 const submitForm = async () => {
 	// Reset messages
@@ -240,8 +296,7 @@ const submitForm = async () => {
 	isSubmitting.value = true;
 
 	try {
-		// ZMIEŃ NA SWOJĄ LOKALIZACJĘ PHP!
-		// Jeśli PHP jest w tym samym folderze co index.html:
+		// Dla głównej domeny hotel-burgholz.de
 		const response = await fetch("/send-email.php", {
 			method: "POST",
 			headers: {
@@ -287,14 +342,72 @@ const submitForm = async () => {
 	}
 };
 </script>
-
 <style lang="scss" scoped>
 @import "@/assets/scss/variables";
 @import "@/assets/scss/mixins";
 
-// .kontakt-page {
-// 	padding-top: 80px; // Account for fixed header
-// }
+/* Success and Error Messages */
+.success-message,
+.error-message {
+	padding: 1rem;
+	margin-bottom: 1.5rem;
+	border-radius: 4px;
+	font-weight: 500;
+}
+
+.success-message {
+	background-color: #d4edda;
+	border: 1px solid #c3e6cb;
+	color: #155724;
+}
+
+.error-message {
+	background-color: #f8d7da;
+	border: 1px solid #f5c6cb;
+	color: #721c24;
+}
+
+/* Disabled state for form elements */
+.form-group input:disabled,
+.form-group select:disabled,
+.form-group textarea:disabled,
+.submit-button:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
+/* Cookie placeholder dla Google Maps */
+.cookie-placeholder {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 450px;
+	background-color: #f5f5f5;
+	padding: 2rem;
+	text-align: center;
+}
+
+.cookie-placeholder p {
+	margin-bottom: 1rem;
+	color: #333;
+	font-size: 1rem;
+}
+
+.cookie-button {
+	background-color: #8b7355;
+	color: white;
+	padding: 0.75rem 1.5rem;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 1rem;
+	transition: background-color 0.3s;
+}
+
+.cookie-button:hover {
+	background-color: #6d5a44;
+}
 
 // Hero section styles
 .hero-section {

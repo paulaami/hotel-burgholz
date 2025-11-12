@@ -42,9 +42,14 @@
 								<router-link :to="'/zimmer/' + key" class="read-more-button">
 									Zimmerdetails
 								</router-link>
-								<router-link :to="'/buchen/' + key" class="booking-button">
+								<button
+									:to="'/buchen/' + key"
+									class="booking-button d21-trigger-ibe"
+									:data-d21="`{'products': ['${room.oneId}']}`"
+									type="button"
+								>
 									Buchen
-								</router-link>
+								</button>
 							</div>
 						</div>
 					</div>
@@ -80,6 +85,7 @@ const rooms = {
 		capacity: "1 Person",
 		price: "Ab 112,– / Nacht",
 		size: "16 m²",
+		oneId: "547bfcb9-e8dc-4f64-a571-07d2d4b8df53",
 	},
 	doppelzimmer: {
 		name: "Doppelzimmer",
@@ -93,6 +99,7 @@ const rooms = {
 		capacity: "2 Personen",
 		price: "Ab 140,– / Nacht",
 		size: "25 m²",
+		oneId: "3de0610c-68ea-c562-01e4-51d99df19d69",
 	},
 	apartment: {
 		name: "Apartment",
@@ -111,6 +118,7 @@ const rooms = {
 		capacity: "2 Personen",
 		price: "Ab 160,– / Nacht",
 		size: "36 m²",
+		oneId: "c757a74d-85ef-8269-d694-46f522b348fc",
 	},
 	studioApartment: {
 		name: "Studio Apartment",
@@ -127,6 +135,7 @@ const rooms = {
 		capacity: "1-2 Personen",
 		price: "Ab 145,– / Nacht",
 		size: "28 m²",
+		oneId: "6bb2ab9c-9555-e574-804d-a00e9525fdce",
 	},
 };
 </script>
@@ -318,6 +327,7 @@ const rooms = {
 				border: 1px solid $color-primary;
 				transition: all 0.3s ease;
 				text-transform: none;
+				cursor: pointer;
 			}
 
 			.read-more-button {
