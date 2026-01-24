@@ -217,6 +217,17 @@ import bikeTwo from "@/assets/images/BikeTours/Hotel Burgholz_Uschi Kitschke Fot
 import bikeThree from "@/assets/images/BikeTours/Hotel Burgholz_Uschi Kitschke Fotografie-105.jpg";
 import bikeFour from "@/assets/images/bike4.jpg";
 import bikeFive from "@/assets/images/bike5.jpg";
+import { useSEO } from "@/composables/useSEO";
+
+useSEO({
+	title: "Radtouren & MTB Eifel | Hotel Burgholz Bike Hotel Kreuzau",
+	description:
+		"Entdecken Sie die besten Radtouren und MTB-Strecken in der Eifel. Hotel Burgholz - Ihr bike-freundliches Hotel in Kreuzau bei Düren mit Fahrradgarage.",
+	keywords:
+		"MTB Eifel, Bike Eifel, Rad Hotel Eifel, Radfahren Eifel, Bike Urlaub Eifel, Eifel Fahrradtouren, Fahrradhotel Düren",
+	canonical: "https://hotel-burgholz.de/bike-tours",
+	ogImage: "https://hotel-burgholz.de/images/bike-tours.jpg",
+});
 
 // Gallery state
 const currentImageIndex = ref(0);

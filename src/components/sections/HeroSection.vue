@@ -62,6 +62,15 @@
 				<p class="hero-subtitle">{{ heroContent.subtitle }}</p>
 			</ContentContainer>
 		</div>
+
+		<!-- Quickbook Widget - ABSOLUTNIE WYŚRODKOWANY -->
+		<div class="hero-quickbook-centered">
+			<div
+				class="d21-quickbook"
+				d21-widget-uuid="53002ca0-6cc9-4077-9f61-0374d3c7cff9"
+			></div>
+		</div>
+
 		<!-- Action buttons -->
 		<div class="hero-actions">
 			<ContentContainer>
@@ -81,8 +90,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from "vue";
 import ContentContainer from "@/components/layout/ContentContainer.vue";
-// import { useI18n } from 'vue-i18n';
-// const { t } = useI18n();
+
 // Hero content
 const heroContent = ref({
 	title: "",
@@ -113,7 +121,7 @@ const slides = ref([
 
 const currentSlide = ref(0);
 const autoSlideInterval = ref<number | null>(null);
-const slideInterval = 8000; // Time between auto slides in ms
+const slideInterval = 8000;
 
 // Set slide by index
 const setSlide = (index: number) => {
@@ -129,7 +137,7 @@ const prevSlide = () => {
 	resetAutoSlideTimer();
 };
 
-// Next slide function - cleaner transition
+// Next slide function
 const nextSlide = () => {
 	const nextIndex = (currentSlide.value + 1) % slides.value.length;
 	currentSlide.value = nextIndex;
@@ -266,6 +274,31 @@ onBeforeUnmount(() => {
 	}
 }
 
+// Quickbook Widget - ABSOLUTNIE NA ŚRODKU EKRANU (bez transform)
+.hero-quickbook-centered {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 90%;
+	max-width: 600px;
+	margin-left: -300px; // Połowa max-width dla centrowania
+	margin-top: -100px; // Połowa przybliżonej wysokości widgetu
+	z-index: 10;
+	animation: fadeInOnly 1.2s ease-out 0.5s both; // Nowa animacja tylko z opacity
+
+	.d21-quickbook {
+		width: 100%;
+	}
+}
+
+:deep(.d21-widget-container) {
+	max-width: 100%;
+}
+
+:deep(.tw-d21-text-left) {
+	text-align: center;
+}
+
 .hero-actions {
 	display: flex;
 	gap: $spacing-md;
@@ -342,12 +375,13 @@ onBeforeUnmount(() => {
 	}
 }
 
-@keyframes zoomIn {
+// Nowa animacja tylko z opacity (bez transform)
+@keyframes fadeInOnly {
 	from {
-		transform: scale(1.1);
+		opacity: 0;
 	}
 	to {
-		transform: scale(1);
+		opacity: 1;
 	}
 }
 
@@ -360,8 +394,6 @@ onBeforeUnmount(() => {
 	}
 }
 
-// Initial page load animation - removed as it's unnecessary now
-
 @include responsive(lg) {
 	.hero-content {
 		.hero-title {
@@ -372,12 +404,23 @@ onBeforeUnmount(() => {
 			font-size: $font-size-medium;
 		}
 	}
+
+	.hero-quickbook-centered {
+		max-width: 500px;
+		margin-left: -250px; // Połowa nowego max-width
+	}
 }
 
 @include responsive(md) {
 	.hero-actions {
 		flex-direction: column;
 		gap: $spacing-sm;
+	}
+
+	.hero-quickbook-centered {
+		max-width: 480px;
+		width: 85%;
+		margin-left: -240px; // Połowa nowego max-width
 	}
 }
 
@@ -442,6 +485,13 @@ onBeforeUnmount(() => {
 				max-width: 160px;
 			}
 		}
+	}
+
+	.hero-quickbook-centered {
+		width: 95%;
+		max-width: 95%;
+		left: 2.5%;
+		margin-left: 0; // Wyłącz margin-left na mobile
 	}
 }
 </style>

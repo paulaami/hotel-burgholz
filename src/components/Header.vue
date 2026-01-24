@@ -125,7 +125,7 @@ onUnmounted(() => {
     <div :class="['navigation', 'detect-nav', { 'navigation__active': isNavigationActive }]">
       <ul class="nav__list detect-nav">
         <li class="nav__list-item detect-nav"><a href="#">Home</a></li>
-        <li class="nav__list-item detect-nav"><a href="#">Zimmer & Suiten</a></li>
+        <li class="nav__list-item detect-nav"><a href="#">Zimmer & Apartments</a></li>
         <li class="nav__list-item detect-nav"><a href="#">Fruhstuck</a></li>
         <li class="nav__list-item detect-nav"><a href="#">Weinbar</a></li>
         <li class="nav__list-item detect-nav"><a href="#">Weinkeller</a></li>

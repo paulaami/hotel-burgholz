@@ -184,8 +184,16 @@
 						</p>
 
 						<div class="social-links">
-							<a href="#" class="social-link facebook">FACEBOOK</a>
-							<a href="#" class="social-link instagram">INSTAGRAM</a>
+							<a
+								href="https://facebook.com/HotelBurgholz"
+								class="social-link facebook"
+								>FACEBOOK</a
+							>
+							<a
+								href="https://www.instagram.com/hotel_burgholz"
+								class="social-link instagram"
+								>INSTAGRAM</a
+							>
 						</div>
 					</div>
 				</div>
@@ -227,6 +235,17 @@
 import { ref, onMounted } from "vue";
 import ContentContainer from "@/components/layout/ContentContainer.vue";
 import * as CookieConsent from "vanilla-cookieconsent";
+import { useSEO } from "@/composables/useSEO";
+
+useSEO({
+	title: "Kontakt | Hotel Burgholz Kreuzau - Jetzt anfragen",
+	description:
+		"Kontaktieren Sie Hotel Burgholz in Kreuzau. Tel: +49 2421 558 92 00 | Email: kontakt@hotel-burgholz.de | Rezeption Mo-So 9-18 Uhr.",
+	keywords:
+		"Hotel Burgholz Kontakt, Hotel Kreuzau Telefon, Hotel Düren Reservierung",
+	canonical: "https://hotel-burgholz.de/kontakt",
+	ogType: "website",
+});
 
 // Form data
 const formData = ref({

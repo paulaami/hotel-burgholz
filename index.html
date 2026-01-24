@@ -1,16 +1,209 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="de">
 	<head>
 		<meta charset="UTF-8" />
-		<link rel="icon" type="image/svg+xml" href="./vite.svg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Vite + Vue + TS</title>
+
+		<!-- Primary Meta Tags -->
+		<title>Hotel Burgholz Kreuzau | Business & Tagungshotel Düren Eifel</title>
+		<meta
+			name="title"
+			content="Hotel Burgholz Kreuzau | Business & Tagungshotel Düren Eifel"
+		/>
+		<meta
+			name="description"
+			content="Hotel Burgholz in Kreuzau bei Düren - Ihr Business Hotel und Tagungshotel in der Eifel. Perfekt für Radfahren, MTB & Wandern. Bike-freundliches Hotel mit modernen Zimmern und Tagungsräumen."
+		/>
+		<meta
+			name="keywords"
+			content="Hotel Düren, Business Hotel Düren, Tagungshotel Düren, Hotel Kreuzau, MTB Eifel, Bike Eifel, Rad Hotel Eifel, Radfahren Eifel, Bike Urlaub Eifel, Eifel Fahrradtouren, Wandern Eifel, Hike Eifel, Hotel Burgholz"
+		/>
+		<meta name="author" content="Hotel Burgholz" />
+		<meta
+			name="robots"
+			content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+		/>
+		<meta name="language" content="de" />
+		<meta name="revisit-after" content="7 days" />
+		<meta name="theme-color" content="#4ea1bb" />
+
+		<!-- Canonical URL -->
+		<link rel="canonical" href="https://hotel-burgholz.de/" />
+
+		<!-- Favicon - NOWA SEKCJA Z GENERATORA -->
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://hotel-burgholz.de/" />
+		<meta
+			property="og:title"
+			content="Hotel Burgholz Kreuzau | Business & Tagungshotel Düren Eifel"
+		/>
+		<meta
+			property="og:description"
+			content="Hotel Burgholz in Kreuzau bei Düren - Ihr Business Hotel und Tagungshotel in der Eifel. Perfekt für Radfahren, MTB & Wandern."
+		/>
+		<meta
+			property="og:image"
+			content="https://hotel-burgholz.de/og-image.jpg"
+		/>
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:locale" content="de_DE" />
+		<meta property="og:site_name" content="Hotel Burgholz" />
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:url" content="https://hotel-burgholz.de/" />
+		<meta
+			name="twitter:title"
+			content="Hotel Burgholz Kreuzau | Business & Tagungshotel Düren Eifel"
+		/>
+		<meta
+			name="twitter:description"
+			content="Hotel Burgholz in Kreuzau bei Düren - Ihr Business Hotel und Tagungshotel in der Eifel. Perfekt für Radfahren, MTB & Wandern."
+		/>
+		<meta
+			name="twitter:image"
+			content="https://hotel-burgholz.de/og-image.jpg"
+		/>
+
+		<!-- Geo Tags -->
+		<meta name="geo.region" content="DE-NW" />
+		<meta name="geo.placename" content="Kreuzau" />
+		<meta name="geo.position" content="50.7589;6.4856" />
+		<meta name="ICBM" content="50.7589, 6.4856" />
+
+		<!-- Preconnect -->
+		<link rel="preconnect" href="https://js-sdk.dirs21.de" />
+		<link rel="dns-prefetch" href="https://js-sdk.dirs21.de" />
+
+		<!-- Structured Data - JSON-LD -->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "Hotel",
+				"name": "Hotel Burgholz",
+				"image": [
+					"https://hotel-burgholz.de/images/hotel-exterior.jpg",
+					"https://hotel-burgholz.de/images/hotel-room.jpg",
+					"https://hotel-burgholz.de/images/hotel-conference.jpg"
+				],
+				"@id": "https://hotel-burgholz.de/#hotel",
+				"url": "https://hotel-burgholz.de",
+				"telephone": "+492421558920",
+				"email": "kontakt@hotel-burgholz.de",
+				"priceRange": "€€",
+				"address": {
+					"@type": "PostalAddress",
+					"streetAddress": "Am Burgholz 27",
+					"addressLocality": "Kreuzau",
+					"addressRegion": "NRW",
+					"postalCode": "52372",
+					"addressCountry": "DE"
+				},
+				"geo": {
+					"@type": "GeoCoordinates",
+					"latitude": 50.7589,
+					"longitude": 6.4856
+				},
+				"openingHoursSpecification": {
+					"@type": "OpeningHoursSpecification",
+					"dayOfWeek": [
+						"Monday",
+						"Tuesday",
+						"Wednesday",
+						"Thursday",
+						"Friday",
+						"Saturday",
+						"Sunday"
+					],
+					"opens": "09:00",
+					"closes": "18:00"
+				},
+				"sameAs": [
+					"https://www.facebook.com/HotelBurgholz",
+					"https://www.instagram.com/hotel_burgholz"
+				],
+				"amenityFeature": [
+					{
+						"@type": "LocationFeatureSpecification",
+						"name": "Fahrradabstellraum",
+						"value": true
+					},
+					{
+						"@type": "LocationFeatureSpecification",
+						"name": "Tagungsräume",
+						"value": true
+					},
+					{
+						"@type": "LocationFeatureSpecification",
+						"name": "Kostenloses WLAN",
+						"value": true
+					},
+					{
+						"@type": "LocationFeatureSpecification",
+						"name": "Parkplatz",
+						"value": true
+					}
+				],
+				"starRating": {
+					"@type": "Rating",
+					"ratingValue": "4"
+				}
+			}
+		</script>
+
+		<!-- LocalBusiness Schema -->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "LocalBusiness",
+				"name": "Hotel Burgholz",
+				"image": "https://hotel-burgholz.de/images/hotel-exterior.jpg",
+				"@id": "https://hotel-burgholz.de",
+				"url": "https://hotel-burgholz.de",
+				"telephone": "+492421558920",
+				"priceRange": "€€",
+				"address": {
+					"@type": "PostalAddress",
+					"streetAddress": "Am Burgholz 27",
+					"addressLocality": "Kreuzau",
+					"postalCode": "52372",
+					"addressCountry": "DE"
+				},
+				"geo": {
+					"@type": "GeoCoordinates",
+					"latitude": 50.7589,
+					"longitude": 6.4856
+				},
+				"openingHoursSpecification": {
+					"@type": "OpeningHoursSpecification",
+					"dayOfWeek": [
+						"Monday",
+						"Tuesday",
+						"Wednesday",
+						"Thursday",
+						"Friday",
+						"Saturday",
+						"Sunday"
+					],
+					"opens": "09:00",
+					"closes": "18:00"
+				}
+			}
+		</script>
 	</head>
 	<body>
 		<noscript>
 			<strong>
-				We're sorry but the page doesn't work properly without JavaScript
-				enabled. Please enable it to continue.
+				Wir entschuldigen uns, aber die Seite funktioniert nicht richtig ohne
+				aktiviertes JavaScript. Bitte aktivieren Sie es, um fortzufahren.
 			</strong>
 		</noscript>
 		<div id="app"></div>

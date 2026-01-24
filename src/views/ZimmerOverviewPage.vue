@@ -4,7 +4,7 @@
 		<section class="hero-section fullwidth-section">
 			<div class="hero-content">
 				<ContentContainer>
-					<h1 class="hero-title">ZIMMER & SUITEN</h1>
+					<h1 class="hero-title">ZIMMER & APARTMENTS</h1>
 					<p class="hero-subtitle">
 						Erholung und Komfort im Herzen der Nordeifel
 					</p>
@@ -60,8 +60,19 @@
 </template>
 
 <script setup lang="ts">
+import { useSEO } from "@/composables/useSEO";
 import { ref } from "vue";
 import ContentContainer from "@/components/layout/ContentContainer.vue";
+
+useSEO({
+	title: "Zimmer & Apartments | Hotel Burgholz Kreuzau Düren",
+	description:
+		"Moderne Zimmer und komfortable Apartments im Hotel Burgholz. Ideal für Business-Reisende, Radfahrer und Wanderer in der Eifel. Jetzt buchen!",
+	keywords:
+		"Hotel Zimmer Düren, Business Zimmer Kreuzau, Apartment Eifel, Übernachtung Düren",
+	canonical: "https://hotel-burgholz.de/zimmer",
+	ogImage: "https://hotel-burgholz.de/images/zimmer-overview.jpg",
+});
 
 // Truncate description to two lines (approximately 150 characters)
 const truncatedDescription = (text) => {
@@ -125,7 +136,7 @@ const rooms = {
 		images: [
 			new URL(
 				"@/assets/images/apartament/doppelzimmer/Hotel Burgholz_Uschi Kitschke Fotografie-80.jpg",
-				import.meta.url
+				import.meta.url,
 			).href,
 			new URL("@/assets/images/apartment2.jpg", import.meta.url).href,
 			new URL("@/assets/images/apartment3.jpg", import.meta.url).href,

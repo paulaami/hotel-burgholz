@@ -1,0 +1,15 @@
+# https://hotel-burgholz.de/robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://hotel-burgholz.de/sitemap.xml
+
+# Blokuj niepotrzebne ścieżki
+Disallow: /admin/
+Disallow: /api/
+Disallow: /*.json$
+Disallow: /node_modules/
+
+# Crawl-delay dla botów
+Crawl-delay: 1

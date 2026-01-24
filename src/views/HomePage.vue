@@ -14,7 +14,18 @@ import DescriptionSection from "@/components/sections/DescriptionSection.vue";
 import FeatureLinksSection from "@/components/sections/FeatureLinksSection.vue";
 import uberUnsImage from "@/assets/images/Hotel Burgholz_Uschi Kitschke Fotografie-174.jpg";
 import hostsImage from "@/assets/images/doppelzimmer2.jpg";
+import { useSEO } from "@/composables/useSEO";
 // Content for the "About Hotel" section
+
+useSEO({
+	title: "Hotel Burgholz Kreuzau | Business & Tagungshotel Düren Eifel",
+	description:
+		"Hotel Burgholz in Kreuzau bei Düren - Ihr Business Hotel und Tagungshotel in der Eifel. Perfekt für Radfahren, MTB & Wandern. Moderne Zimmer und Tagungsräume.",
+	keywords:
+		"Hotel Düren, Business Hotel Düren, Tagungshotel Düren, Hotel Kreuzau, MTB Eifel, Bike Eifel, Rad Hotel Eifel, Radfahren Eifel, Wandern Eifel",
+	canonical: "https://hotel-burgholz.de/",
+	ogImage: "https://hotel-burgholz.de/images/hotel-exterior.jpg",
+});
 const aboutContent = ref({
 	subtitle: "",
 	title: "DAS HOTEL BURGHOLZ",

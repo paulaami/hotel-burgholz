@@ -1,6 +1,10 @@
 <template>
 	<div class="nav__icons">
-		<a href="https://www.instagram.com" target="_blank" class="social-icon">
+		<a
+			href="https://www.instagram.com/hotel_burgholz"
+			target="_blank"
+			class="social-icon"
+		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 24 24"
@@ -17,7 +21,11 @@
 				<line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
 			</svg>
 		</a>
-		<a href="https://www.facebook.com" target="_blank" class="social-icon">
+		<a
+			href="https://facebook.com/HotelBurgholz"
+			target="_blank"
+			class="social-icon"
+		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 24 24"

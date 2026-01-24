@@ -153,7 +153,7 @@ onUnmounted(() => {
 	padding: 0 $spacing-lg;
 	transition: background-color $transition-speed ease,
 		box-shadow $transition-speed ease;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+	// border-bottom: 1px solid rgba(255, 255, 255, 0.25);
 
 	&.transparent {
 		background-color: transparent;

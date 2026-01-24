@@ -256,7 +256,17 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import ContentContainer from "@/components/layout/ContentContainer.vue";
+import { useSEO } from "@/composables/useSEO";
 
+useSEO({
+	title: "Tagungen & Konferenzen | Tagungshotel Burgholz Kreuzau Düren",
+	description:
+		"Moderne Tagungsräume im Hotel Burgholz bei Düren. Perfekt für Business-Meetings, Seminare und Konferenzen in der Eifel. Jetzt anfragen!",
+	keywords:
+		"Tagungshotel Düren, Business Hotel Düren, Konferenzräume Kreuzau, Seminarhotel Eifel, Meeting Raum Düren",
+	canonical: "https://hotel-burgholz.de/tagung",
+	ogImage: "https://hotel-burgholz.de/images/tagung.jpg",
+});
 // Gallery state
 const currentImageIndex = ref(0);
 const isDetailsActive = ref(false);
@@ -265,19 +275,19 @@ const isDetailsActive = ref(false);
 const conferenceRoomImages = [
 	new URL(
 		"@/assets/images/Tagungsraum/Hotel Burgholz_Uschi Kitschke Fotografie-108.jpg",
-		import.meta.url
+		import.meta.url,
 	).href,
 	new URL(
 		"@/assets/images/Tagungsraum/Hotel Burgholz_Uschi Kitschke Fotografie-116.jpg",
-		import.meta.url
+		import.meta.url,
 	).href,
 	new URL(
 		"@/assets/images/Tagungsraum/Hotel Burgholz_Uschi Kitschke Fotografie-120.jpg",
-		import.meta.url
+		import.meta.url,
 	).href,
 	new URL(
 		"@/assets/images/Tagungsraum/Hotel Burgholz_Uschi Kitschke Fotografie-126.jpg",
-		import.meta.url
+		import.meta.url,
 	).href,
 	// new URL("@/assets/images/Konferrenz6.jpg", import.meta.url).href,
 ];
