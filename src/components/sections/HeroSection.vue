@@ -292,11 +292,11 @@ onBeforeUnmount(() => {
 }
 
 :deep(.d21-widget-container) {
-	max-width: 100%;
+	max-width: 100% !important;
 }
 
 :deep(.tw-d21-text-left) {
-	text-align: center;
+	text-align: center !important;
 }
 
 .hero-actions {
