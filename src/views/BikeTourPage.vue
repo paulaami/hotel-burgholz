@@ -49,7 +49,11 @@
 							</p>
 						</div>
 						<div class="action-buttons">
-							<a href="#" class="action-button dark">ANFRAGEN</a>
+							<a
+								href="mailto:kontakt@hotel-burgholz.de"
+								class="action-button dark"
+								>ANFRAGEN</a
+							>
 							<button class="details-button" @click="toggleDetails">
 								<span class="details-icon">i</span>
 								DETAILS
